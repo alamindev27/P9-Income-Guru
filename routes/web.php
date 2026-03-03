@@ -1,12 +1,13 @@
 <?php
 
+use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    // return view('welcome');
 
-    return redirect('/login');
+Route::controller(FrontendController::class)->group(function () {
+    Route::get('/', 'index')->name('frontend.index');
+    // Add more frontend routes here if needed
 });
 
 Auth::routes();

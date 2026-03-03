@@ -9,19 +9,10 @@ if (!function_exists('setting')) {
         return Cache::rememberForever('app_setting', function () {
             return Setting::select([
                 'author_name',
+                'site_name',
                 'logo',
                 'favicon',
-                'meta_title',
-                'meta_keywords',
-                'meta_description',
-                'copywright',
-                'instagram_link',
-                'linkedin_link',
-                'twitter_link',
-                'github_link',
-                'facebook_link',
-            ])
-                ->first();
+            ])->first();
         });
     }
 }

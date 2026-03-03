@@ -19,6 +19,7 @@ class SettingController extends Controller
     public function update(Request $request)
     {
         $request->validate([
+            'site_name'   => 'required|string|max:255',
             'author_name' => 'required|string|max:255',
             'logo'        => 'nullable|image|mimes:jpg,jpeg,png,webp,svg',
             'favicon'     => 'nullable|image|mimes:jpg,jpeg,png,webp,svg',
@@ -51,6 +52,7 @@ class SettingController extends Controller
             }
         }
 
+        $setting->site_name = $request->site_name;
         $setting->author_name = $request->author_name;
         $setting->save();
 

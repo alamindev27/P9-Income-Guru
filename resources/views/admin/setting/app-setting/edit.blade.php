@@ -28,20 +28,31 @@
                                 <form class="form-horizontal form-material" action="{{ route('admin.setting.update') }}"
                                     method="POST" enctype="multipart/form-data">
                                     @csrf
-                                    <div class="form-group">
-                                        <label class="col-md-12">Author Name <small class="text-danger">*</small></label>
-                                        <div class="col-md-12">
-                                            <input type="text" placeholder="Author Name" class="form-control form-control-line @error('author_name') is-invalid @enderror" value="{{ old('author_name') ?? setting()->author_name }}" name="author_name">
-                                            @error('author_name')
-                                                <small class="text-danger">{{ $message }}</small>
-                                            @enderror
+                                    <div class="row">
+                                        <div class="form-group col-lg-6">
+                                            <label class="col-md-12">Site Name <small class="text-danger">*</small></label>
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Site Name" class="form-control form-control-line @error('site_name') is-invalid @enderror" value="{{ old('site_name') ?? setting()->site_name }}" name="site_name">
+                                                @error('site_name')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <label class="col-md-12">Author Name <small class="text-danger">*</small></label>
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Author Name" class="form-control form-control-line @error('author_name') is-invalid @enderror" value="{{ old('author_name') ?? setting()->author_name }}" name="author_name">
+                                                @error('author_name')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
                                         </div>
                                     </div>
 
 
 
                                     <div class="row">
-                                        <div class="form-group col-6">
+                                        <div class="form-group col-lg-6">
                                             <label class="col-md-12">Logo</label>
                                             <div class="col-md-12">
                                                 <input type="file"
@@ -56,7 +67,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group col-6">
+                                        <div class="form-group col-lg-6">
                                             <label class="col-md-12">Favicon</label>
                                             <div class="col-md-12">
                                                 <input type="file"

@@ -7,10 +7,6 @@
 </li>
 
 <li class="nav-item">
-    <a class="nav-link " href="">Meta Setting</a>
-</li>
-
-<li class="nav-item">
     <a class="nav-link " href="">Security Setting</a>
 </li>
 

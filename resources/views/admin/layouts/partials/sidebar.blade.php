@@ -40,11 +40,11 @@
 
 
 
-                <li class="sidebar-item">
+                {{-- <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" aria-expanded="false">
                         <span class="hide-menu">Log Out</span>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </nav>
 

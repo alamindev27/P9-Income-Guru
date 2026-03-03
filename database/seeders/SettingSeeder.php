@@ -17,11 +17,6 @@ class SettingSeeder extends Seeder
         DB::table('settings')->insert([
             [
                 'author_name' => 'MD. Al-Amin',
-                'instagram_link' => 'https://www.instagram.com/alamndev27',
-                'linkedin_link' => 'https://www.linkedin.com/in/alamndev27',
-                'github_link' => 'https://www.github.com/alamndev27',
-                'facebook_link' => 'https://www.facebook.com/alamndev27',
-                'twitter_link' => 'https://www.twitter.com/alamndev27',
             ]
         ]);
 
