@@ -27,28 +27,28 @@
                             @csrf
                             <div class="row">
                                 <div class="form-group col-lg-6">
-                                    <label for="name">Name</label>
+                                    <label for="name">Name <small class="text-danger">*</small></label>
                                     <input type="text" class="form-control" placeholder="Promo Name" name="name" required id="name" value="{{ old('name') }}">
                                     @error('name')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="form-group col-lg-6">
-                                    <label for="promo_code">Promo Code</label>
+                                    <label for="promo_code">Promo Code <small class="text-danger">*</small></label>
                                     <input type="text" class="form-control" placeholder="Promo Code" name="promo_code" required id="promo_code" value="{{ old('promo_code') }}">
                                     @error('promo_code')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="form-group col-lg-6">
-                                    <label for="link">Promo Link</label>
+                                    <label for="link">Promo Link <small class="text-danger">*</small></label>
                                     <input type="text" class="form-control" placeholder="Promo Link" name="link" required id="link" value="{{ old('link') }}">
                                     @error('link')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="form-group col-lg-6">
-                                    <label for="icon">Icon</label>
+                                    <label for="icon">Icon <small class="text-danger">*</small></label>
                                     <input type="file" class="form-control" name="icon" required id="icon">
                                     @error('icon')
                                         <small class="text-danger">{{ $message }}</small>

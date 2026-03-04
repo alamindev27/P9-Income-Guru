@@ -28,7 +28,7 @@
                             @method('PUT')
                             <div class="row">
                                 <div class="form-group col-lg-6">
-                                    <label for="name">Name</label>
+                                    <label for="name">Name <small class="text-danger">*</small></label>
                                     <input type="text" class="form-control" placeholder="Promo Name" name="name"
                                         required id="name" value="{{ old('name', $promo->name) }}">
                                     @error('name')
@@ -36,7 +36,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group col-lg-6">
-                                    <label for="promo_code">Promo Code</label>
+                                    <label for="promo_code">Promo Code <small class="text-danger">*</small></label>
                                     <input type="text" class="form-control" placeholder="Promo Code" name="promo_code"
                                         required id="promo_code" value="{{ old('promo_code', $promo->promo_code) }}">
                                     @error('promo_code')
@@ -44,7 +44,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group col-lg-6">
-                                    <label for="link">Promo Link</label>
+                                    <label for="link">Promo Link <small class="text-danger">*</small></label>
                                     <input type="text" class="form-control" placeholder="Promo Link" name="link"
                                         required id="link" value="{{ old('link', $promo->link) }}">
                                     @error('link')
