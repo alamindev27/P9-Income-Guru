@@ -10,7 +10,9 @@ Route::controller(FrontendController::class)->group(function () {
     // Add more frontend routes here if needed
 });
 
-Auth::routes();
+Auth::routes([
+    'register' => false,
+]);
 
 
 // --- Admin Routes ---
