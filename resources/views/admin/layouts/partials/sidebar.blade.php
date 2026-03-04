@@ -38,6 +38,13 @@
                 </li>
 
                 <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link " href="{{ route('admin.banners.index') }}"
+                        aria-expanded="false">
+                        <span class="hide-menu">Banners</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link " href="{{ route('admin.promos.index') }}"
                         aria-expanded="false">
                         <span class="hide-menu">Promos</span>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PromoController;
@@ -31,6 +32,7 @@ Route::name('admin.')->group(function () {
     });
 
     Route::resource('promos', PromoController::class)->except(['show']);
+    Route::resource('banners', BannerController::class)->except(['create', 'show', 'destroy']);
 
 
 });
