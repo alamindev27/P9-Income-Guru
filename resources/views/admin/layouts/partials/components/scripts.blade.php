@@ -21,18 +21,18 @@
 <script src="{{ asset('backend/dist') }}/js/pages/dashboards/dashboard1.js"></script>
 
 <script>
-toastr.options = {
-    "positionClass": "toast-top-right",
-    "timeOut": "3000",
-    "extendedTimeOut": "0",
-    "closeButton": false,
-    "progressBar": false,
-    "newestOnTop": true,
-    "showDuration": "0",
-    "hideDuration": "0",
-    "showMethod": "fadeIn",
-    "hideMethod": "fadeOut"
-};
+    toastr.options = {
+        "positionClass": "toast-top-right",
+        "timeOut": "3000",
+        "extendedTimeOut": "0",
+        "closeButton": false,
+        "progressBar": false,
+        "newestOnTop": true,
+        "showDuration": "0",
+        "hideDuration": "0",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    };
 </script>
 
-@stack('scripts')
+@yield('scripts')
