@@ -7,6 +7,6 @@
 </li>
 
 <li class="nav-item">
-    <a class="nav-link " href="">Security Setting</a>
+    <a class="nav-link " href="{{ route('admin.setting.security.edit') }}">Security Setting</a>
 </li>
 

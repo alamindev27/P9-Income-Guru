@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class SettingController extends Controller
 {
@@ -57,5 +59,32 @@ class SettingController extends Controller
         $setting->save();
 
         return back()->with('success', 'Updated successfully');
+    }
+
+
+    public function editSecurity()
+    {
+        return view('admin.setting.security-setting.edit');
+    }
+
+    public function updateSecurity(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required|string',
+            'new_password' => 'required|string|min:8|confirmed:password_confirmation',
+        ]);
+
+        $user = auth()->user();
+
+        if (!password_verify($request->current_password, $user->password)) {
+            return redirect()->back()->withErrors(['current_password' => 'Current password is incorrect.']);
+        }
+
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        // Auth::logout();
+
+        return redirect()->back()->with('success', 'Password updated successfully.');
     }
 }

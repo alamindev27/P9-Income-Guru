@@ -60,6 +60,7 @@
     <script src="{{ asset('backend/assets/libs/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('backend/assets/libs/popper.js/dist/umd/popper.min.js') }}"></script>
     <script src="{{ asset('backend/assets/libs/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    @include('admin.layouts.partials.components.message')
 </body>
 
 </html>

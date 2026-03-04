@@ -14,8 +14,13 @@ Route::name('admin.')->group(function () {
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
 
-    Route::get('/site-setting', [SettingController::class, 'edit'])->name('setting.edit');
-    Route::post('/site-setting', [SettingController::class, 'update'])->name('setting.update');
+    Route::controller(SettingController::class)->group(function () {
+        Route::get('/site-setting', 'edit')->name('setting.edit');
+        Route::post('/site-setting', 'update')->name('setting.update');
+
+        Route::get('/security-setting', 'editSecurity')->name('setting.security.edit');
+        Route::post('/security-setting', 'updateSecurity')->name('setting.security.update');
+    });
 
 
 
