@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PromoController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
 
 Route::name('admin.')->group(function () {
@@ -33,6 +34,7 @@ Route::name('admin.')->group(function () {
 
     Route::resource('promos', PromoController::class)->except(['show']);
     Route::resource('banners', BannerController::class)->except(['create', 'show', 'destroy']);
+    Route::resource('videos', VideoController::class)->except(['show']);
 
 
 });
