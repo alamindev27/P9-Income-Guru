@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Promo;
+use App\Models\Social;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -21,7 +22,11 @@ class FrontendController extends Controller
             return Promo::select(['name', 'icon', 'link', 'promo_code'])->get();
         });
 
-        return view('frontend.index', compact('banner', 'promos'));
+        $socials = Cache::rememberForever('socials', function () {
+            return Social::where('status', 'active')->select(['name', 'link', 'subscriber', 'icon'])->get();
+        });
+
+        return view('frontend.index', compact('banner', 'promos', 'socials'));
     }
 
     public function videos()

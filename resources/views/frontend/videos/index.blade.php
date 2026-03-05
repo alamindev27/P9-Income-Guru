@@ -83,7 +83,7 @@
     <section class="youtube-list py-5">
         <div class="container-fluid px-4">
             <div class="row g-4 justify-content-center">
-                @foreach ($videos as $item)
+                @forelse ($videos as $item)
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                         <a href="{{ route('frontend.video.watch', $item->slug) }}" class="video-card text-decoration-none">
                             <div class="thumbnail-box">
@@ -104,27 +104,11 @@
                             </div>
                         </a>
                     </div>
-                @endforeach
-
-                {{-- <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <div class="video-card">
-                        <div class="thumbnail-box">
-                            <img src="https://via.placeholder.com/320x180/2c2c2c/white?text=Movie+Poster"
-                                class="img-fluid rounded-3" alt="Thumbnail">
-                            <span class="video-duration">2:09:47</span>
-                        </div>
-                        <div class="video-info-container d-flex mt-2">
-                            <div class="channel-logo">
-                                <img src="https://via.placeholder.com/40" class="rounded-circle" alt="Channel">
-                            </div>
-                            <div class="video-details ms-3">
-                                <h6 class="video-title">RDX Full Movie Hindi Dubbed | Prabhas & Sreeleela</h6>
-                                <p class="channel-name">Action Movies 2026</p>
-                                <p class="video-meta">2.5M views • 2 days ago</p>
-                            </div>
-                        </div>
+                @empty
+                    <div class="col-12">
+                        <p class="alert alert-bg-color mb-0 text-center text-white">No videos found.</p>
                     </div>
-                </div> --}}
+                @endforelse
 
             </div>
         </div>

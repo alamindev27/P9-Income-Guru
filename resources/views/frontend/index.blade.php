@@ -2,6 +2,98 @@
 
 @section('head')
     <link rel="preload" as="image" href="{{ asset($banner->image) }}">
+    <style>
+        /* Social Media Section Styling */
+        .social-media-section {
+            background-color: var(--neutral-dark-color);
+            /* YouTube pure dark mode background */
+        }
+
+        .social-card {
+            display: block;
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--dark-gray-color);
+            border-radius: 16px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid var(--deep-color);
+        }
+
+        .social-icon-box {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-card h5 {
+            color: var(--white-color);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .social-card p {
+            color: var(--deep-color);
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        /* Hover Effects with Brand Colors */
+        .social-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--deep-color);
+        }
+
+        .social-icon-box{
+            color: #aaa;
+        }
+
+        /* Brand Specific Colors on Hover */
+        .telegram:hover .social-icon-box  {
+            color: #0088cc;
+        }
+
+        .youtube:hover .social-icon-box  {
+            color: #ff0000;
+        }
+
+        .facebook:hover .social-icon-box  {
+            color: #1877f2;
+        }
+
+        .instagram:hover .social-icon-box  {
+            color: #e4405f;
+        }
+
+        /* WhatsApp Hover Color */
+        .whatsapp:hover .social-icon-box  {
+            color: #25D366;
+        }
+
+        /* Twitter (X) Hover Color */
+        .twitter:hover .social-icon-box  {
+            color: #1DA1F2;
+            /* Traditional Twitter Blue */
+            /* Or use #FFFFFF if you want the new 'X' look on a dark background */
+        }
+
+        .social-card:hover h5 {
+            color: var(--white-color);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Responsive Grid for Small Screens */
+        @media (max-width: 576px) {
+            .social-card {
+                padding: 20px 10px;
+            }
+
+            .social-icon-box {
+                font-size: 2rem;
+            }
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -22,7 +114,7 @@
         </div>
     </section>
 
-    <section class="prediction-section py-3">
+    <section class="prediction-section py-5">
         <div class="container text-center">
 
             <div class="d-flex justify-content-center gap-3 mb-4">
@@ -55,8 +147,8 @@
                                     </a>
                                 </div>
                                 <span>Promo code: <span class="code">{{ $item->promo_code }}</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                        class="bi bi-clipboard-check" viewBox="0 0 16 16">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd"
                                             d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0" />
                                         <path
@@ -69,37 +161,38 @@
                         </div>
                     @empty
                         <div class="col-12">
-                            <div class="alert alert-bg-color mb-0">No promo codes available at the moment. Please check back later.</div>
+                            <div class="alert alert-bg-color mb-0">No promo codes available at the moment. Please check back
+                                later.</div>
                         </div>
                     @endforelse
-
-
-                    {{-- <div class="col-lg-6">
-                        <div class="promo-code-box d-flex align-items-center justify-content-between">
-                            <div>
-                                <span class="hand-icon me-2">👉</span><img
-                                    src="https://thimbles.devman07.com/img/bookmaker/1xbet_gui.png" alt="">
-                            </div>
-                            <span>Promo code: <span class="code">DM1X2</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-clipboard-check" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0" />
-                                    <path
-                                        d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z" />
-                                    <path
-                                        d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z" />
-                                </svg>
-                            </span>
-                        </div>
-                    </div> --}}
-
                 </div>
+            </div>
+            <button class="btn btn-next mt-2">Next</button>
+        </div>
+    </section>
 
+    <section class="social-media-section py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h3 class="section-title text-white fw-bold">Connect With Us</h3>
+                {{-- <p class="text-secondary">Stay updated with our latest news and predictions on social media.</p> --}}
             </div>
 
-            <button class="btn btn-next mt-2">Next</button>
+            <div class="row g-4 justify-content-center">
+                @foreach ($socials as $item)
+                    <div class="col-6 col-md-3">
+                        <a href="{{ $item->link }}" class="social-card {{ Str::slug($item->name) }}" target="_blank">
 
+                            <div class="social-icon-box">
+                                {!! $item->icon !!}
+                            </div>
+                            <h5>{{ $item->name }}</h5>
+                            <p>{{ $item->subscriber }}</p>
+                        </a>
+                    </div>
+                @endforeach
+
+            </div>
         </div>
     </section>
 @endsection
