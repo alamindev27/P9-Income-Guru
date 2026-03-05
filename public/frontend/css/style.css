@@ -13,6 +13,10 @@
     --deep-color: #E0E0E0;
 }
 
+.alert-bg-color{
+    background-color: var(--medium-dark-color);
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--dark-gray-color);
