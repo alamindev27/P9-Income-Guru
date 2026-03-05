@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Social;
 use Illuminate\Http\Request;
 
 class SocialController extends Controller
@@ -12,7 +13,8 @@ class SocialController extends Controller
      */
     public function index()
     {
-        //
+        $datas = Social::all();
+        return view('admin.socials.index', compact('datas'));
     }
 
     /**
@@ -44,7 +46,8 @@ class SocialController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = Social::findOrFail($id);
+        return view('admin.socials.edit', compact('data'));
     }
 
     /**
@@ -52,7 +55,15 @@ class SocialController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'link' => 'required|url|max:255',
+            'subscriber' => 'required|string|max:255',
+            'status' => 'required|in:active,inactive',
+        ]);
+
+        $data = Social::findOrFail($id);
+        $data->update($request->all());
+        return redirect()->route('admin.socials.index')->with('success', 'Social updated successfully.');
     }
 
     /**

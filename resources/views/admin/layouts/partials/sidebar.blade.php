@@ -58,6 +58,13 @@
                     </a>
                 </li>
 
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link " href="{{ route('admin.socials.index') }}"
+                        aria-expanded="false">
+                        <span class="hide-menu">Socials</span>
+                    </a>
+                </li>
+
 
 
 
