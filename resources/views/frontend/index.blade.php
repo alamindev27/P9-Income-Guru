@@ -45,34 +45,34 @@
             border-color: var(--deep-color);
         }
 
-        .social-icon-box{
+        .social-icon-box {
             color: #aaa;
         }
 
         /* Brand Specific Colors on Hover */
-        .telegram:hover .social-icon-box  {
+        .telegram:hover .social-icon-box {
             color: #0088cc;
         }
 
-        .youtube:hover .social-icon-box  {
+        .youtube:hover .social-icon-box {
             color: #ff0000;
         }
 
-        .facebook:hover .social-icon-box  {
+        .facebook:hover .social-icon-box {
             color: #1877f2;
         }
 
-        .instagram:hover .social-icon-box  {
+        .instagram:hover .social-icon-box {
             color: #e4405f;
         }
 
         /* WhatsApp Hover Color */
-        .whatsapp:hover .social-icon-box  {
+        .whatsapp:hover .social-icon-box {
             color: #25D366;
         }
 
         /* Twitter (X) Hover Color */
-        .twitter:hover .social-icon-box  {
+        .twitter:hover .social-icon-box {
             color: #1DA1F2;
             /* Traditional Twitter Blue */
             /* Or use #FFFFFF if you want the new 'X' look on a dark background */
@@ -92,6 +92,50 @@
             .social-icon-box {
                 font-size: 2rem;
             }
+        }
+
+        /* Tooltip wrapper */
+        .copy-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Tooltip text style */
+        .copy-tooltip {
+            visibility: hidden;
+            width: 60px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 4px;
+            padding: 3px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            /* Icon er upore show korbe */
+            left: 50%;
+            margin-left: -30px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+        }
+
+        /* Tooltip er nicher chotto arrow */
+        .copy-tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
+
+        /* Show hole opacity barbe */
+        .show-tooltip .copy-tooltip {
+            visibility: visible;
+            opacity: 1;
         }
     </style>
 @endsection
@@ -146,23 +190,29 @@
                                         <img src="{{ asset($item->icon) }}" alt="">
                                     </a>
                                 </div>
-                                <span>Promo code: <span class="code">{{ $item->promo_code }}</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd"
-                                            d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0" />
-                                        <path
-                                            d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z" />
-                                        <path
-                                            d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z" />
-                                    </svg>
+
+                                <span>Promo code:
+                                    <span class="code" id="code-{{ $loop->index }}">{{ $item->promo_code }}</span>
+
+                                    <span class="copy-wrapper" onclick="copyToClipboard('{{ $item->promo_code }}', this)">
+                                        <span class="copy-tooltip">Copied!</span>
+                                        <span class="copy-btn" style="cursor: pointer;">
+                                            {{-- Default Icon --}}
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z" />
+                                                <path
+                                                    d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z" />
+                                            </svg>
+                                        </span>
+                                    </span>
                                 </span>
                             </div>
                         </div>
                     @empty
                         <div class="col-12">
-                            <div class="alert alert-bg-color mb-0">No promo codes available at the moment. Please check back
-                                later.</div>
+                            <div class="alert alert-bg-color mb-0">No promo codes available at the moment.</div>
                         </div>
                     @endforelse
                 </div>
@@ -195,4 +245,46 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('footer')
+    <script>
+        function copyToClipboard(text, element) {
+            const originalIcon =
+                `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/></svg>`;
+            const successIcon =
+                `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16"><path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708"/></svg>`;
+
+            const btn = element.querySelector('.copy-btn');
+
+            // Clipboard Copy Logic
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(showSuccess);
+            } else {
+                let textArea = document.createElement("textarea");
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showSuccess();
+                } catch (err) {}
+                textArea.remove();
+            }
+
+            function showSuccess() {
+                // Show Tooltip & Change Icon
+                element.classList.add('show-tooltip');
+                btn.innerHTML = successIcon;
+                btn.style.color = "#28a745";
+
+                // Reset after 1.5 seconds
+                setTimeout(() => {
+                    element.classList.remove('show-tooltip');
+                    btn.innerHTML = originalIcon;
+                    btn.style.color = "";
+                }, 1500);
+            }
+        }
+    </script>
 @endsection
