@@ -5,9 +5,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
-Route::controller(FrontendController::class)->group(function () {
-    Route::get('/', 'index')->name('frontend.index');
-    // Add more frontend routes here if needed
+Route::controller(FrontendController::class)->as('frontend.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/videos', 'videos')->name('videos');
+    Route::get('/watch/{slug}', 'watch')->name('video.watch');
+
 });
 
 Auth::routes([

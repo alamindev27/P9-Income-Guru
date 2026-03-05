@@ -2,7 +2,6 @@
 
 @section('head')
     <link rel="preload" as="image" href="{{ asset($banner->image) }}">
-    <title>Alamindev27</title>
 @endsection
 
 @section('content')
@@ -27,7 +26,7 @@
         <div class="container text-center">
 
             <div class="d-flex justify-content-center gap-3 mb-4">
-                <button class="btn btn-next-1 btn-sm">একাউন্ট খোলার জন্য Videos দেখুন</button>
+                <a href="{{ route('frontend.videos') }}" class="btn btn-next-1 btn-sm">একাউন্ট খোলার জন্য Videos দেখুন</a>
             </div>
 
             <div class="intro-text mb-4">

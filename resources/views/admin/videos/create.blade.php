@@ -42,7 +42,7 @@
                                 </div>
 
                                 <div class="form-group col-lg-6">
-                                    <label for="thumbnail">Thumbnail <small class="text-danger">*</small></label>
+                                    <label for="thumbnail">Thumbnail <small>(1280x720px)</small> <small class="text-danger">*</small></label>
                                     <input type="file" class="form-control" name="thumbnail" required id="thumbnail" accept="image/*">
                                     @error('thumbnail')
                                         <small class="text-danger">{{ $message }}</small>

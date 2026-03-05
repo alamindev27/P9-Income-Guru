@@ -11,11 +11,10 @@
                 </div> -->
 
         <div class="top-bar-center d-flex align-items-center">
-            <div class="user-icon me-2">
-                <img src="{{ asset(setting()->logo) }}" alt="Logo"
-                    class="rounded-circle bg-white " style="width: 35px; height: 35px;">
-            </div>
-            <span class="fw-bold" style="color: #FFD700; font-size: 1.1rem;">{{ setting()->site_name }}</span>
+            <a href="{{ route('frontend.index') }}" class="user-icon me-2">
+                <img src="{{ asset(setting()->logo) }}" alt="{{ setting()->site_name }}" class="rounded-circle bg-white " style="width: 35px; height: 35px;">
+            </a>
+            <a href="{{ route('frontend.index') }}" class="fw-bold text-decoration-none" style="color: #FFD700; font-size: 1.1rem;">{{ setting()->site_name }}</a>
         </div>
 
         <div class="top-bar-right">
