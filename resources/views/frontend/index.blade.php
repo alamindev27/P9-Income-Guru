@@ -2,142 +2,7 @@
 
 @section('head')
     <link rel="preload" as="image" href="{{ asset($banner->image) }}">
-    <style>
-        /* Social Media Section Styling */
-        .social-media-section {
-            background-color: var(--neutral-dark-color);
-            /* YouTube pure dark mode background */
-        }
-
-        .social-card {
-            display: block;
-            text-align: center;
-            padding: 30px 20px;
-            background: var(--dark-gray-color);
-            border-radius: 16px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: 1px solid var(--deep-color);
-        }
-
-        .social-icon-box {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            transition: transform 0.3s ease;
-        }
-
-        .social-card h5 {
-            color: var(--white-color);
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .social-card p {
-            color: var(--deep-color);
-            font-size: 0.85rem;
-            margin: 0;
-        }
-
-        /* Hover Effects with Brand Colors */
-        .social-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--deep-color);
-        }
-
-        .social-icon-box {
-            color: #aaa;
-        }
-
-        /* Brand Specific Colors on Hover */
-        .telegram:hover .social-icon-box {
-            color: #0088cc;
-        }
-
-        .youtube:hover .social-icon-box {
-            color: #ff0000;
-        }
-
-        .facebook:hover .social-icon-box {
-            color: #1877f2;
-        }
-
-        .instagram:hover .social-icon-box {
-            color: #e4405f;
-        }
-
-        /* WhatsApp Hover Color */
-        .whatsapp:hover .social-icon-box {
-            color: #25D366;
-        }
-
-        /* Twitter (X) Hover Color */
-        .twitter:hover .social-icon-box {
-            color: #1DA1F2;
-            /* Traditional Twitter Blue */
-            /* Or use #FFFFFF if you want the new 'X' look on a dark background */
-        }
-
-        .social-card:hover h5 {
-            color: var(--white-color);
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-        }
-
-        /* Responsive Grid for Small Screens */
-        @media (max-width: 576px) {
-            .social-card {
-                padding: 20px 10px;
-            }
-
-            .social-icon-box {
-                font-size: 2rem;
-            }
-        }
-
-        /* Tooltip wrapper */
-        .copy-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-
-        /* Tooltip text style */
-        .copy-tooltip {
-            visibility: hidden;
-            width: 60px;
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            border-radius: 4px;
-            padding: 3px 0;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            /* Icon er upore show korbe */
-            left: 50%;
-            margin-left: -30px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 12px;
-        }
-
-        /* Tooltip er nicher chotto arrow */
-        .copy-tooltip::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: #333 transparent transparent transparent;
-        }
-
-        /* Show hole opacity barbe */
-        .show-tooltip .copy-tooltip {
-            visibility: visible;
-            opacity: 1;
-        }
-    </style>
+    @include('frontend.layouts.partials.index-style')
 @endsection
 
 @section('content')
@@ -217,7 +82,29 @@
                     @endforelse
                 </div>
             </div>
-            <button class="btn btn-next mt-2">Next</button>
+            {{-- <button class="btn btn-next mt-2">Next</button> --}}
+            <button class="btn-next mt-2" data-bs-toggle="modal" data-bs-target="#registrationModal">Next</button>
+
+            <div class="modal fade" id="registrationModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content custom-modal-bg">
+                        <div class="modal-body text-center p-5">
+                            <h4 class="modal-title-custom mb-3">Registration Check</h4>
+                            <p class="modal-text-custom mb-4">Did you register through one of the links?</p>
+
+                            <div class="d-flex justify-content-center gap-3">
+                                <button onclick="return window.location.href='{{ route('frontend.verify.player') }}'" class="btn-modal btn-yes d-flex align-items-center justify-content-center">
+                                    <span class="me-2">✅</span> Yes
+                                </button>
+                                <button class="btn-modal btn-no d-flex align-items-center justify-content-center"
+                                    data-bs-dismiss="modal">
+                                    <span class="me-2">❌</span> No
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

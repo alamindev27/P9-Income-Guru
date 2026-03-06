@@ -4,6 +4,6 @@
     <link href="{{ asset('frontend/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
     <link rel="icon" href="{{ asset(setting()->favicon) }}" type="image/png">
-    <title>{{ setting()->site_name }}</title>
     @yield('head')
+    <title>{{ setting()->site_name }}</title>
 </head>

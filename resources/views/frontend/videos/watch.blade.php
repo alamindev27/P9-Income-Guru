@@ -1,6 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('head')
+    <title>{{ $video->title }}</title>
     <style>
         .video-wrapper {
             position: relative;
@@ -14,13 +15,15 @@
             object-fit: cover;
             border-radius: 10px;
         }
-        .title{
+
+        .title {
             margin-top: 15px;
             color: var(--white-color);
             font-size: 18px;
             font-weight: 600;
         }
-        .description{
+
+        .description {
             margin-top: 10px;
             color: var(--deep-color);
             font-size: 14px;

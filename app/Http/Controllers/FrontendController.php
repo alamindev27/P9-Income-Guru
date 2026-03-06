@@ -42,4 +42,43 @@ class FrontendController extends Controller
         $video = Video::where('slug', $slug)->firstOrFail();
         return view('frontend.videos.watch', compact('video'));
     }
+
+
+    public function verifyPlayer()
+    {
+        $promos = Cache::rememberForever('promos', function () {
+            return Promo::select(['id', 'name', 'icon'])->get();
+        });
+        return view('frontend.verify-player', compact('promos'));
+    }
+
+    public function playerPromotion(Request $request)
+    {
+        $request->validate([
+            'player_id' => 'required|numeric|min:1000000000|max:9999999999',
+            'server_name' => 'required|string|max:10',
+            'promo_id' => 'required|exists:promos,id',
+        ]);
+        // return $request;
+
+
+        $promotion = [
+            'player_id' => $request->player_id,
+            'server_name' => $request->server_name,
+            'promo_id' => $request->promo_id,
+        ];
+        session(['promotion' => $promotion]);
+
+        return redirect()->route('frontend.promotion.run');
+    }
+
+    public function promotion()
+    {
+
+        $promotion = session('promotion');
+
+
+
+        return view('frontend.promotion', compact('promotion'));
+    }
 }
