@@ -109,15 +109,15 @@
 
             @forelse ($promos as $item)
                 <div class="col-lg-6 mt-3">
-                    <img src="{{ asset('frontend/img/1xbet.webp') }}" alt="" class="img-fluid rounded border mb-3">
+                    <img src="{{ $item->banner_image ? asset($item->banner_image) : 'https://placehold.co/708x310?text='.$item->name.'  ' }}" alt="{{ $item->name }}" class="img-fluid rounded border mb-3">
 
                     <div class="promo-code-box d-flex align-items-center justify-content-between gap-2 text-center"
                         style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#promoErrorModal">
                         <div class="d-flex align-items-center">
-                            <img src="{{ asset($item->icon) }}" alt="" style="width: 100%">
+                            <img src="{{ asset($item->icon) }}" alt="{{ $item->name }}" style="width: 100%">
                         </div>
 
-                        <span class="text-white">মাল্টির কোড নিতে ক্লিক করুন</span>
+                        <span class="text-white">মাল্টির কোড নিতে <a href="#">ক্লিক করুন</a></span>
                     </div>
                     <hr class="text-white mt-4">
                 </div>

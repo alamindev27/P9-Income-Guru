@@ -72,9 +72,10 @@ class FrontendController extends Controller
     public function promotion()
     {
         $promotion = session('promotion');
-        $promos = Cache::rememberForever('promos', function () {
-            return Promo::select(['id', 'name', 'icon', 'promo_code'])->get();
-        });
+        if (!$promotion) {
+            return redirect()->route('frontend.verify.player')->with('error', 'Please verify your player first.');
+        }
+        $promos = Promo::select(['id', 'name', 'icon', 'promo_code', 'banner_image'])->get();
         return view('frontend.promotion', compact('promotion', 'promos'));
     }
 }

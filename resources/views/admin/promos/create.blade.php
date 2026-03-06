@@ -54,6 +54,13 @@
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
+                                <div class="form-group col-lg-6">
+                                    <label for="banner_image">Banner Image <small>(708*310px)</small> <small class="text-danger">*</small></label>
+                                    <input type="file" class="form-control" name="banner_image" required id="banner_image">
+                                    @error('banner_image')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
 
                                 <div class="col-12 text-center">
                                     <button type="submit" class="btn btn-primary">Save & Create Promo</button>
@@ -68,4 +75,5 @@
     </div>
 @endsection
 @section('footer')
+
 @endsection

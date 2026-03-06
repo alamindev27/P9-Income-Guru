@@ -59,6 +59,21 @@
                                     @enderror
                                 </div>
 
+                                <div class="form-group col-lg-6">
+                                    <label for="banner_image">Banner Image <small>(708*310px)</small> <small class="text-danger">*</small></label>
+                                    <input type="file" class="form-control" name="banner_image" required id="banner_image">
+                                    @error('banner_image')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group col-lg-6">
+                                    <label for="banner_image">Banner Image Preview</label>
+                                    <img src="{{ asset($promo->banner_image) }}" alt="{{ $promo->name }} banner Img" width="100" class="d-block"/>
+                                </div>
+
+
+
                                 <div class="col-12 text-center">
                                     <button type="submit" class="btn btn-primary">Save & Update Promo</button>
                                 </div>

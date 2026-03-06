@@ -22,12 +22,16 @@ class PromoRequest extends FormRequest
     public function rules(): array
     {
         $iconRule = $this->isMethod('post')
-            ? 'required|image|mimes:jpg,jpeg,png,svg|max:2048'
-            : 'nullable|image|mimes:jpg,jpeg,png,svg|max:2048';
+            ? 'required|image|mimes:jpg,jpeg,png,svg,webp'
+            : 'nullable|image|mimes:jpg,jpeg,png,svg,webp';
+        $bannerImageRule = $this->isMethod('post')
+            ? 'required|image|mimes:jpg,jpeg,png,svg,webp'
+            : 'nullable|image|mimes:jpg,jpeg,png,svg,webp';
 
         return [
             'name'       => 'required|string|max:100',
             'icon'       => $iconRule,
+            'banner_image' => $bannerImageRule,
             'link'       => 'required|url|max:255',
             'promo_code' => 'required|string|max:50',
         ];
