@@ -398,7 +398,7 @@
         }
     </script>
 
-    <script>
+    {{-- <script>
         // Global function for Bookmaker Selection
         function setBookmarker(id, element) {
             const promoInput = document.getElementById('promo_id');
@@ -484,5 +484,104 @@
                 serverSelect.addEventListener('change', validateForm);
             }
         });
-    </script>
+    </script> --}}
+
+    <script>
+    // 1. Global function for Bookmaker Selection (Keep it outside)
+    function setBookmarker(id, element) {
+        const promoInput = document.getElementById('promo_id');
+        const promoError = document.getElementById('promo_error');
+
+        if (promoInput) {
+            promoInput.value = id;
+            if (promoError) promoError.style.display = 'none';
+
+            // Visual Selection UI
+            document.querySelectorAll('.bookmaker-logo').forEach(el => {
+                el.style.filter = 'grayscale(100%)';
+                el.style.border = 'none';
+                el.classList.remove('selected-bookie');
+            });
+
+            element.style.filter = 'grayscale(0%) drop-shadow(0 0 8px #00d2ff)';
+            element.style.border = '1px solid #00d2ff';
+            element.style.borderRadius = '8px';
+            element.classList.add('selected-bookie');
+
+            // Dispatch a custom event to trigger validation
+            window.dispatchEvent(new Event('form-check'));
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const playerIdInput = document.getElementById('player_id_input');
+        const playerIdError = document.getElementById('player_id_error');
+        const serverSelect = document.getElementById('server_select');
+        const submitBtn = document.getElementById('submit_btn');
+        const promoInput = document.getElementById('promo_id');
+
+        // Main Validation Logic
+        function validateForm() {
+            const pId = playerIdInput.value.trim();
+            const isPromoSelected = promoInput.value !== "";
+            const isServerSelected = serverSelect.value !== "" && serverSelect.value !== "Select Server";
+            const isPlayerIdValid = (pId.length === 10 && pId.startsWith('1') && /^\d+$/.test(pId));
+
+            if (isPromoSelected && isServerSelected && isPlayerIdValid) {
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = "1";
+                submitBtn.style.cursor = "pointer";
+                submitBtn.style.pointerEvents = "auto"; // For mobile
+            } else {
+                submitBtn.disabled = true;
+                submitBtn.style.opacity = "0.5";
+                submitBtn.style.cursor = "not-allowed";
+                submitBtn.style.pointerEvents = "none"; // Disables touch on mobile
+            }
+        }
+
+        // Real-time Input Validation for Mobile & Desktop
+        if (playerIdInput) {
+            // 'input' covers most things, 'keyup' and 'blur' for extra safety on mobile
+            ['input', 'keyup', 'blur'].forEach(evt => {
+                playerIdInput.addEventListener(evt, function() {
+                    const val = this.value.trim();
+                    let msg = "";
+
+                    if (val.length > 0) {
+                        if (!/^\d+$/.test(val)) {
+                            msg = "❌ Only numbers allowed!";
+                        } else if (val.charAt(0) !== '1') {
+                            msg = "❌ ID must start with 1";
+                        } else if (val.length !== 10) {
+                            msg = "⚠️ Need 10 digits (Current: " + val.length + ")";
+                        }
+                    }
+
+                    if (msg !== "" && val.length > 0) {
+                        playerIdError.textContent = msg;
+                        playerIdError.style.display = "block";
+                        this.style.borderColor = "#ff4d4d";
+                    } else {
+                        playerIdError.style.display = "none";
+                        this.style.borderColor = val.length === 10 ? "#25D366" : "#00d2ff";
+                    }
+
+                    validateForm();
+                });
+            });
+        }
+
+        // Server Selection Change
+        if (serverSelect) {
+            serverSelect.addEventListener('change', validateForm);
+        }
+
+        // Custom Listener for Bookmaker Selection (Mobile fix)
+        window.addEventListener('form-check', validateForm);
+
+        // Initial check on load
+        validateForm();
+    });
+</script>
 @endsection
