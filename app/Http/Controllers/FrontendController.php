@@ -43,7 +43,6 @@ class FrontendController extends Controller
         return view('frontend.videos.watch', compact('video'));
     }
 
-
     public function verifyPlayer()
     {
         $promos = Cache::rememberForever('promos', function () {
@@ -59,8 +58,6 @@ class FrontendController extends Controller
             'server_name' => 'required|string|max:10',
             'promo_id' => 'required|exists:promos,id',
         ]);
-        // return $request;
-
 
         $promotion = [
             'player_id' => $request->player_id,
@@ -74,11 +71,10 @@ class FrontendController extends Controller
 
     public function promotion()
     {
-
         $promotion = session('promotion');
-
-
-
-        return view('frontend.promotion', compact('promotion'));
+        $promos = Cache::rememberForever('promos', function () {
+            return Promo::select(['id', 'name', 'icon', 'promo_code'])->get();
+        });
+        return view('frontend.promotion', compact('promotion', 'promos'));
     }
 }
