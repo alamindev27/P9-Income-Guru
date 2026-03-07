@@ -81,8 +81,8 @@ class FrontendController extends Controller
         ) {
             return redirect()->route('frontend.verify.player');
         }
-        $promos = Promo::select(['id', 'name', 'icon', 'promo_code', 'banner_image'])->get();
+        $datas = Promo::select(['id', 'name', 'icon', 'promo_code', 'banner_image'])->get();
 
-        return view('frontend.promotion', compact('promotion', 'promos'));
+        return view('frontend.promotion', compact('promotion', 'datas'));
     }
 }

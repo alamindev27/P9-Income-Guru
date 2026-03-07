@@ -104,6 +104,8 @@
             margin-right: 0px;
         }
     </style>
+
+    <link rel="preload" as="image" href="{{ asset('frontend/img/click-button.png') }}">
 @endsection
 @section('content')
     <div class="container">
@@ -118,7 +120,7 @@
             </div>
 
 
-            @forelse ($promos as $item)
+            @forelse ($datas as $item)
                 <div class="col-lg-6 mt-3">
                     <img src="{{ $item->banner_image ? asset($item->banner_image) : 'https://placehold.co/708x310?text=' . $item->name . '  ' }}"
                         alt="{{ $item->name }}" class="img-fluid rounded border mb-3">
