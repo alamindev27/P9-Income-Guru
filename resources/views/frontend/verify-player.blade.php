@@ -123,7 +123,7 @@
                             <div class="info-step mb-3">
                                 <h5 class="step-label">1. Select your bookmaker</h5>
                                 <div class="row justify-content-center">
-                                    @foreach ($promos as $item)
+                                    @foreach ($datas as $item)
                                         <div class="col-6 col-md-3 bookmaker-logo text-center mt-3 px-1"
                                             onclick="setBookmarker('{{ $item->id }}', this)">
                                             <img src="{{ asset($item->icon) }}" alt="{{ $item->name }}" class="img-fluid"
@@ -133,9 +133,9 @@
                                 </div>
                                 <span id="promo_error" class="text-danger small" style="display:none;">❌ Please select a
                                     bookmaker</span>
-                                    @error('promo_id')
-                                        <span class="text-danger small" style="display:block;">❌ {{ $message }}</span>
-                                    @enderror
+                                @error('promo_id')
+                                    <span class="text-danger small" style="display:block;">❌ {{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="info-step mb-3">
@@ -151,16 +151,33 @@
                                     </div>
                                     <span id="player_id_error" class="text-danger small"
                                         style="display:none; font-weight: 500;"></span>
-                                        @error('player_id')
-                                            <span class="text-danger small" style="display:block;">❌ {{ $message }}</span>
-                                        @enderror
+                                    @error('player_id')
+                                        <span class="text-danger small" style="display:block;">❌ {{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
 
                             <div class="info-step mb-3">
-                                <h5 class="step-label">3. Select Server your country</h5>
+                                <h5 class="step-label">3. Deposit Amount</h5>
+                                <div class="d-flex flex-column gap-1 mt-3">
+                                    <div class="d-flex gap-2">
+                                        <input type="number" id="deposit_amount_input"
+                                            class="form-control custom-input-glow" placeholder="Enter deposit amount"
+                                            name="deposit_amount" required autocomplete="off">
+                                    </div>
+                                    <span id="deposit_amount_error" class="text-danger small"
+                                        style="display:none; font-weight: 500;"></span>
+                                    @error('deposit_amount')
+                                        <span class="text-danger small" style="display:block;">❌ {{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="info-step mb-3">
+                                <h5 class="step-label">4. Select Server your country</h5>
                                 <div class="mt-3">
-                                    <select id="server_select" class="form-select custom-input-glow" name="server_name" required>
+                                    <select id="server_select" class="form-select custom-input-glow" name="server_name"
+                                        required>
                                         <option value="" selected disabled>Select Server</option>
                                         <option value="dz">🇩🇿 Algeria</option>
                                         <option value="ao">🇦🇴 Angola</option>
@@ -364,11 +381,12 @@
                                         <option value="tv">🇹🇻 Tuvalu</option>
                                         <option value="vu">🇻🇺 Vanuatu</option>
                                     </select>
-                                    <span id="server_error" class="text-danger small" style="display:none;">❌ Please select a
+                                    <span id="server_error" class="text-danger small" style="display:none;">❌ Please
+                                        select a
                                         server</span>
-                                        @error('server')
-                                            <span class="text-danger small" style="display:block;">❌ {{ $message }}</span>
-                                        @enderror
+                                    @error('server')
+                                        <span class="text-danger small" style="display:block;">❌ {{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -398,8 +416,10 @@
         }
     </script>
 
-    {{-- <script>
-        // Global function for Bookmaker Selection
+
+
+    <script>
+        // ১. বুকমেকার সিলেকশন ফাংশন (এটি গ্লোবাল রাখা হয়েছে)
         function setBookmarker(id, element) {
             const promoInput = document.getElementById('promo_id');
             const promoError = document.getElementById('promo_error');
@@ -408,180 +428,125 @@
                 promoInput.value = id;
                 if (promoError) promoError.style.display = 'none';
 
-                // Visual Selection UI
+                // ভিজ্যুয়াল সিলেকশন UI আপডেট
                 document.querySelectorAll('.bookmaker-logo').forEach(el => {
                     el.style.filter = 'grayscale(100%)';
                     el.style.border = 'none';
+                    el.classList.remove('selected-bookie');
                 });
+
                 element.style.filter = 'grayscale(0%) drop-shadow(0 0 8px #00d2ff)';
                 element.style.border = '1px solid #00d2ff';
                 element.style.borderRadius = '8px';
+                element.classList.add('selected-bookie');
 
-                // Re-validate to enable button
-                validateForm();
+                // ভ্যালিডেশন ট্রিগার করার জন্য কাস্টম ইভেন্ট
+                window.dispatchEvent(new Event('form-check'));
             }
         }
 
         document.addEventListener('DOMContentLoaded', function() {
             const playerIdInput = document.getElementById('player_id_input');
             const playerIdError = document.getElementById('player_id_error');
+            const amountInput = document.getElementById('deposit_amount_input');
+            const amountError = document.getElementById('deposit_amount_error');
             const serverSelect = document.getElementById('server_select');
             const submitBtn = document.getElementById('submit_btn');
             const promoInput = document.getElementById('promo_id');
 
-            // Main Validation Function
-            window.validateForm = function() {
-                const pId = playerIdInput.value;
-                const isPromoSelected = promoInput.value !== "";
-                const isServerSelected = serverSelect.value !== "";
-                const isPlayerIdValid = (pId.length === 10 && pId.charAt(0) === '1' && /^\d+$/.test(pId));
+            // ২. মেইন ভ্যালিডেশন লজিক (সব ফিল্ড চেক করবে)
+            function validateForm() {
+                const pId = playerIdInput.value.trim();
+                const amountVal = amountInput.value.trim();
 
-                if (isPromoSelected && isServerSelected && isPlayerIdValid) {
-                    // Sob thik thakle button enable hobe
+                const isPromoSelected = promoInput.value !== "";
+                const isServerSelected = serverSelect.value !== "" && serverSelect.value !== "Select Server";
+                const isPlayerIdValid = (pId.length === 10 && pId.startsWith('1') && /^\d+$/.test(pId));
+
+                // Amount ভ্যালিডেশন: খালি থাকা যাবে না, সংখ্যা হতে হবে এবং ০ এর বেশি হতে হবে
+                const isAmountValid = (amountVal !== "" && !isNaN(amountVal) && parseFloat(amountVal) > 0);
+
+                if (isPromoSelected && isServerSelected && isPlayerIdValid && isAmountValid) {
                     submitBtn.disabled = false;
                     submitBtn.style.opacity = "1";
                     submitBtn.style.cursor = "pointer";
+                    submitBtn.style.pointerEvents = "auto";
                 } else {
-                    // Condition match na korle disabled thakbe
                     submitBtn.disabled = true;
                     submitBtn.style.opacity = "0.5";
                     submitBtn.style.cursor = "not-allowed";
+                    submitBtn.style.pointerEvents = "none";
                 }
-            };
+            }
 
-            // Real-time Input for Player ID
+            // ৩. Player ID রিয়েল-টাইম ভ্যালিডেশন
             if (playerIdInput) {
-                playerIdInput.addEventListener('input', function() {
-                    const val = this.value;
-                    let msg = "";
+                ['input', 'keyup', 'blur'].forEach(evt => {
+                    playerIdInput.addEventListener(evt, function() {
+                        const val = this.value.trim();
+                        let msg = "";
 
-                    if (val.length > 0) {
-                        if (!/^\d+$/.test(val)) {
-                            msg = "❌ Only numbers allowed!";
-                        } else if (val.charAt(0) !== '1') {
-                            msg = "❌ ID must start with 1";
-                        } else if (val.length !== 10) {
-                            msg = "⚠️ Need 10 digits (Current: " + val.length + ")";
+                        if (val.length > 0) {
+                            if (!/^\d+$/.test(val)) {
+                                msg = "❌ Only numbers allowed!";
+                            } else if (val.charAt(0) !== '1') {
+                                msg = "❌ ID must start with 1";
+                            } else if (val.length !== 10) {
+                                msg = "⚠️ Need 10 digits (Current: " + val.length + ")";
+                            }
                         }
-                    }
 
-                    // Show/Hide Error Text
-                    if (msg !== "" && val.length > 0) {
-                        playerIdError.textContent = msg;
-                        playerIdError.style.display = "block";
-                        this.style.borderColor = "#ff4d4d";
-                    } else {
-                        playerIdError.style.display = "none";
-                        this.style.borderColor = val.length === 10 ? "#25D366" : "#00d2ff";
-                    }
-
-                    validateForm(); // Check again on input
+                        if (msg !== "" && val.length > 0) {
+                            playerIdError.textContent = msg;
+                            playerIdError.style.display = "block";
+                            this.style.borderColor = "#ff4d4d";
+                        } else {
+                            playerIdError.style.display = "none";
+                            this.style.borderColor = val.length === 10 ? "#25D366" : "#00d2ff";
+                        }
+                        validateForm();
+                    });
                 });
             }
 
-            // Check on Server Selection change
+            // ৪. Amount ফিল্ডের জন্য রিয়েল-টাইম ভ্যালিডেশন
+            if (amountInput) {
+                ['input', 'keyup', 'blur'].forEach(evt => {
+                    amountInput.addEventListener(evt, function() {
+                        const val = this.value.trim();
+                        let msg = "";
+
+                        if (val !== "") {
+                            if (isNaN(val) || parseFloat(val) <= 0) {
+                                msg = "❌ Enter a valid amount!";
+                            }
+                        }
+
+                        if (msg !== "" && val !== "") {
+                            if (amountError) {
+                                amountError.textContent = msg;
+                                amountError.style.display = "block";
+                            }
+                            this.style.borderColor = "#ff4d4d";
+                        } else {
+                            if (amountError) amountError.style.display = "none";
+                            this.style.borderColor = val !== "" ? "#25D366" : "#00d2ff";
+                        }
+                        validateForm();
+                    });
+                });
+            }
+
+            // ৫. Server সিলেকশন চেঞ্জ লিসেনার
             if (serverSelect) {
                 serverSelect.addEventListener('change', validateForm);
             }
+
+            // ৬. বুকমেকার সিলেকশনের জন্য কাস্টম লিসেনার
+            window.addEventListener('form-check', validateForm);
+
+            // পেজ লোড হওয়ার সময় একবার চেক করা
+            validateForm();
         });
-    </script> --}}
-
-    <script>
-    // 1. Global function for Bookmaker Selection (Keep it outside)
-    function setBookmarker(id, element) {
-        const promoInput = document.getElementById('promo_id');
-        const promoError = document.getElementById('promo_error');
-
-        if (promoInput) {
-            promoInput.value = id;
-            if (promoError) promoError.style.display = 'none';
-
-            // Visual Selection UI
-            document.querySelectorAll('.bookmaker-logo').forEach(el => {
-                el.style.filter = 'grayscale(100%)';
-                el.style.border = 'none';
-                el.classList.remove('selected-bookie');
-            });
-
-            element.style.filter = 'grayscale(0%) drop-shadow(0 0 8px #00d2ff)';
-            element.style.border = '1px solid #00d2ff';
-            element.style.borderRadius = '8px';
-            element.classList.add('selected-bookie');
-
-            // Dispatch a custom event to trigger validation
-            window.dispatchEvent(new Event('form-check'));
-        }
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const playerIdInput = document.getElementById('player_id_input');
-        const playerIdError = document.getElementById('player_id_error');
-        const serverSelect = document.getElementById('server_select');
-        const submitBtn = document.getElementById('submit_btn');
-        const promoInput = document.getElementById('promo_id');
-
-        // Main Validation Logic
-        function validateForm() {
-            const pId = playerIdInput.value.trim();
-            const isPromoSelected = promoInput.value !== "";
-            const isServerSelected = serverSelect.value !== "" && serverSelect.value !== "Select Server";
-            const isPlayerIdValid = (pId.length === 10 && pId.startsWith('1') && /^\d+$/.test(pId));
-
-            if (isPromoSelected && isServerSelected && isPlayerIdValid) {
-                submitBtn.disabled = false;
-                submitBtn.style.opacity = "1";
-                submitBtn.style.cursor = "pointer";
-                submitBtn.style.pointerEvents = "auto"; // For mobile
-            } else {
-                submitBtn.disabled = true;
-                submitBtn.style.opacity = "0.5";
-                submitBtn.style.cursor = "not-allowed";
-                submitBtn.style.pointerEvents = "none"; // Disables touch on mobile
-            }
-        }
-
-        // Real-time Input Validation for Mobile & Desktop
-        if (playerIdInput) {
-            // 'input' covers most things, 'keyup' and 'blur' for extra safety on mobile
-            ['input', 'keyup', 'blur'].forEach(evt => {
-                playerIdInput.addEventListener(evt, function() {
-                    const val = this.value.trim();
-                    let msg = "";
-
-                    if (val.length > 0) {
-                        if (!/^\d+$/.test(val)) {
-                            msg = "❌ Only numbers allowed!";
-                        } else if (val.charAt(0) !== '1') {
-                            msg = "❌ ID must start with 1";
-                        } else if (val.length !== 10) {
-                            msg = "⚠️ Need 10 digits (Current: " + val.length + ")";
-                        }
-                    }
-
-                    if (msg !== "" && val.length > 0) {
-                        playerIdError.textContent = msg;
-                        playerIdError.style.display = "block";
-                        this.style.borderColor = "#ff4d4d";
-                    } else {
-                        playerIdError.style.display = "none";
-                        this.style.borderColor = val.length === 10 ? "#25D366" : "#00d2ff";
-                    }
-
-                    validateForm();
-                });
-            });
-        }
-
-        // Server Selection Change
-        if (serverSelect) {
-            serverSelect.addEventListener('change', validateForm);
-        }
-
-        // Custom Listener for Bookmaker Selection (Mobile fix)
-        window.addEventListener('form-check', validateForm);
-
-        // Initial check on load
-        validateForm();
-    });
-</script>
+    </script>
 @endsection

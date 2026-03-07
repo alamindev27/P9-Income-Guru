@@ -22,7 +22,7 @@ Route::controller(FrontendController::class)->as('frontend.')->group(function ()
     Route::get('/watch/{slug}', 'watch')->name('video.watch');
     Route::get('/verify/player', 'verifyPlayer')->name('verify.player');
     Route::post('/verify/player', 'playerPromotion')->name('player.promotion');
-    Route::get('/promotion', 'promotion')->name('promotion.run');
+    Route::get('/promotion/{playerId}/{serverName}/{depositAmount}/{promoId}', 'promotion')->name('promotion.run');
 
 });
 
