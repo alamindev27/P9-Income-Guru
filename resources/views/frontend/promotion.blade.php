@@ -92,6 +92,17 @@
             backdrop-filter: blur(8px);
             background-color: rgba(0, 0, 0, 0.85);
         }
+
+        .promo-code-box {
+            border-radius: 25px;
+        }
+
+        .promo-code-box img {
+            width: 100%;
+            height: 50px;
+            object-fit: contain;
+            margin-right: 0px;
+        }
     </style>
 @endsection
 @section('content')
@@ -109,15 +120,16 @@
 
             @forelse ($promos as $item)
                 <div class="col-lg-6 mt-3">
-                    <img src="{{ $item->banner_image ? asset($item->banner_image) : 'https://placehold.co/708x310?text='.$item->name.'  ' }}" alt="{{ $item->name }}" class="img-fluid rounded border mb-3">
-
-                    <div class="promo-code-box d-flex align-items-center justify-content-between gap-2 text-center"
-                        style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#promoErrorModal">
-                        <div class="d-flex align-items-center">
-                            <img src="{{ asset($item->icon) }}" alt="{{ $item->name }}" style="width: 100%">
+                    <img src="{{ $item->banner_image ? asset($item->banner_image) : 'https://placehold.co/708x310?text=' . $item->name . '  ' }}"
+                        alt="{{ $item->name }}" class="img-fluid rounded border mb-3">
+                    <div class="promo-code-box d-flex align-items-center justify-content-between text-center gap-1" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#promoErrorModal">
+                        <div class="text-center mx-auto">
+                            <img src="{{ asset($item->icon) }}" alt="{{ $item->name }}" style="" class="img-fluid">
                         </div>
-
-                        <span class="text-white">মাল্টির কোড নিতে <a href="#">ক্লিক করুন</a></span>
+                        <p class="text-nowrap mb-0 fw-bold" style="font-size: 20px;">Get Code</p>
+                        <div class="text-center mx-auto">
+                            <img src="{{ asset('frontend/img/click-button.png') }}" alt="{{ $item->name }}" class="img-fluid">
+                        </div>
                     </div>
                     <hr class="text-white mt-4">
                 </div>
