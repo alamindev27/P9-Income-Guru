@@ -12,6 +12,7 @@ if (!function_exists('setting')) {
                 'site_name',
                 'logo',
                 'favicon',
+                'voice'
             ])->first();
         });
     }
