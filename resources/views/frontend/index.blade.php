@@ -27,6 +27,17 @@
         <div class="container text-center">
 
             <div class="d-flex justify-content-center gap-3 mb-4">
+                @if (isset(setting()->voice) && file_exists(public_path(setting()->voice)))
+                    <div class="mt-2">
+                        <audio controls>
+                            <source src="{{ asset(setting()->voice) }}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                @endif
+            </div>
+
+            <div class="d-flex justify-content-center gap-3 mb-4">
                 <a href="{{ route('frontend.videos') }}" class="btn btn-next-1 btn-sm">একাউন্ট খোলার জন্য Videos দেখুন</a>
             </div>
 
@@ -93,7 +104,8 @@
                             <p class="modal-text-custom mb-4">Did you register through one of the links?</p>
 
                             <div class="d-flex justify-content-center gap-3">
-                                <button onclick="return window.location.href='{{ route('frontend.verify.player') }}'" class="btn-modal btn-yes d-flex align-items-center justify-content-center">
+                                <button onclick="return window.location.href='{{ route('frontend.verify.player') }}'"
+                                    class="btn-modal btn-yes d-flex align-items-center justify-content-center">
                                     <span class="me-2">✅</span> Yes
                                 </button>
                                 <button class="btn-modal btn-no d-flex align-items-center justify-content-center"
