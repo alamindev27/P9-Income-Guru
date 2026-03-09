@@ -111,7 +111,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2 class="section-title-glow my-3 text-center">Here will be the promotion heading</h2>
+                <h2 class="section-title-glow my-3 text-center">সঠিক ভাবে প্রমোকোড ব্যাবহার করে একাউন্ট অপেন না করলে মাল্টির কোড আসবে না!</h2>
 
                 <div class="alert alert-bg-color">
                     <marquee behavior="scroll" direction="" class="text-white py-0 fw-bold" style="font-size: 17px;">No promo

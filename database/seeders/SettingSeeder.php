@@ -17,6 +17,7 @@ class SettingSeeder extends Seeder
         DB::table('settings')->insert([
             [
                 'author_name' => 'MD. Al-Amin',
+                'voice' => 'default/default-voice.mp3',
             ]
         ]);
 

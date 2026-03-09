@@ -30,7 +30,7 @@
             <div id="loginform">
                 <div class="logo">
                     <span class="db mb-2">
-                        <img src="{{ asset(setting()->logo) }}" alt="{{ setting()->site_name }}" />
+                        <img src="{{ asset(setting()->logo) }}" alt="{{ setting()->site_name }}" width="80"/>
                     </span>
                     <h5 class="font-medium my-2">
                         @if (Request::url() == route('login'))

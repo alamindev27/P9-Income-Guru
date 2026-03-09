@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('author_name')->nullable();
             $table->string('logo')->default('default/logo.png');
             $table->string('favicon')->default('default/favicon.png');
+            $table->string('voice')->nullable();
             $table->timestamps();
         });
     }
