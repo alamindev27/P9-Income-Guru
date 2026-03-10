@@ -28,8 +28,9 @@
 
             <div class="d-flex justify-content-center gap-3 mb-4">
                 @if (isset(setting()->voice) && file_exists(public_path(setting()->voice)))
-                    <div class="mt-2">
-                        <audio controls>
+                    <div class="" class="">
+                        <audio controls
+                            style="border: 2px solid #3498db; border-radius: 30px; box-shadow: 0 0 35px rgba(0, 210, 255, 0.6);">
                             <source src="{{ asset(setting()->voice) }}" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
