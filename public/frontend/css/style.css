@@ -44,48 +44,10 @@ body {
 }
 
 
-/* .btn-outline-light {
-    border-color: #2c2c2c;
-    background-color: rgba(255, 255, 255, 0.05);
-}
-
-.btn-outline-light:hover {
-    background-color: var(--medium-dark-color);
-    border-color: #444;
-} */
-
-
 @media (max-width: 576px) {
     .top-bar-center span {
         font-size: 0.9rem;
     }
-}
-
-
-
-
-
-.hero-banner {
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-
-    height: 50vh;
-    position: relative;
-    overflow: hidden;
-    color: var(--white-color);
-}
-
-
-.banner-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-
-    background: radial-gradient(circle, rgba(0, 0, 0, 0.5) 0%, rgba(18, 18, 18, 0.95) 100%);
-    z-index: 1;
 }
 
 
@@ -110,7 +72,6 @@ body {
 
 .hero-title .highlight-text {
     background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%);
-
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     mix-blend-mode: hard-light;
@@ -129,27 +90,7 @@ body {
     line-height: 1.6;
 }
 
-
-.hero-banner .btn-outline-light {
-    border-color: #ffd700;
-    color: #ffd700;
-    background-color: transparent;
-    transition: all 0.3s ease;
-}
-
-.hero-banner .btn-outline-light:hover {
-    background-color: #ffd700;
-    color: #000;
-}
-
-
 @media (max-width: 768px) {
-    .hero-banner {
-        height: auto;
-        min-height: 40vh;
-        background-attachment: scroll;
-    }
-
     .hero-title {
         font-size: 2.5rem;
     }
@@ -259,7 +200,7 @@ body {
     border-radius: 50px;
     padding: 12px 60px;
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1rem;
     box-shadow: 0 5px 20px rgba(52, 152, 219, 0.4);
     border: none;
     transition: 0.3s;

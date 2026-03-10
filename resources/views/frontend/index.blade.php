@@ -6,9 +6,7 @@
 @endsection
 
 @section('content')
-    <section class="hero-banner" style="background-image: url('{{ asset($banner->image) }}')">
-        <div class="banner-overlay"></div>
-
+    <section class="prediction-section py-1">
         <div class="container h-100">
             <div class="row h-100 align-items-center text-center">
                 <div class="col-md-10 offset-md-1">
@@ -23,10 +21,20 @@
         </div>
     </section>
 
-    <section class="prediction-section py-5">
+    <section class="py-1">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-12 col-lg-6">
+                    <img src="{{ asset($banner->image) }}" alt="" class="img-fluid w-100" style="border: 2px solid #3498db; border-radius: 10px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="prediction-section py-3">
         <div class="container text-center">
 
-            <div class="d-flex justify-content-center gap-3 mb-4">
+            <div class="d-flex justify-content-center gap-3 my-4">
                 @if (isset(setting()->voice) && file_exists(public_path(setting()->voice)))
                     <div class="" class="">
                         <audio controls
@@ -39,7 +47,7 @@
             </div>
 
             <div class="d-flex justify-content-center gap-3 mb-4">
-                <a href="{{ route('frontend.videos') }}" class="btn btn-next-1 btn-sm">একাউন্ট খোলার জন্য Videos দেখুন</a>
+                <a href="{{ route('frontend.videos') }}" class="btn btn-next-1 btn-sm">একাউন্ট খোলার Tutorials দেখুন</a>
             </div>
 
             <div class="intro-text mb-4">
@@ -68,7 +76,7 @@
                                     </a>
                                 </div>
 
-                                <span>Promo code:
+                                <span style="font-size: 17px;">Promo code:
                                     <span class="code" id="code-{{ $loop->index }}">{{ $item->promo_code }}</span>
 
                                     <span class="copy-wrapper" onclick="copyToClipboard('{{ $item->promo_code }}', this)">
@@ -121,7 +129,7 @@
         </div>
     </section>
 
-    <section class="social-media-section py-5">
+    <section class="social-media-section py-3">
         <div class="container">
             <div class="text-center mb-5">
                 <h3 class="section-title text-white fw-bold">Connect With Us</h3>

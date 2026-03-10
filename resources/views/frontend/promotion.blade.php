@@ -114,8 +114,7 @@
                 <h2 class="section-title-glow my-3 text-center">সঠিক ভাবে প্রমোকোড ব্যাবহার করে একাউন্ট অপেন না করলে মাল্টির কোড আসবে না!</h2>
 
                 <div class="alert alert-bg-color">
-                    <marquee behavior="scroll" direction="" class="text-white py-0 fw-bold" style="font-size: 17px;">No promo
-                        codes available at the moment.</marquee>
+                    <marquee behavior="scroll" direction="" class="text-white py-0 fw-bold" style="font-size: 17px;">অবশ্যই আপনার খুলা একাউন্ট টি ভেরিফাইড থাকতে হবে এবং মিনিমাম ১০০০ টাকা ডিপোজিট করতে হবে</marquee>
                 </div>
             </div>
 
