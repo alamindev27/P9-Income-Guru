@@ -121,7 +121,10 @@
                         <div class="info-form-wrapper mx-auto text-start" style="max-width: 600px;">
 
                             <div class="info-step mb-3">
-                                <h5 class="step-label">1. Select your bookmaker</h5>
+                                <h5 class="step-label">
+                                    <span class="d-block">1. Select your bookmaker.</span>
+                                    <small class="d-block">১) কোন সাইট এ একাউন্ট খুলেছেন?</small>
+                                </h5>
                                 <div class="row justify-content-center">
                                     @foreach ($datas as $item)
                                         <div class="col-6 col-md-3 bookmaker-logo text-center mt-3 px-1"
@@ -139,7 +142,10 @@
                             </div>
 
                             <div class="info-step mb-3">
-                                <h5 class="step-label">2. Enter Player ID</h5>
+                                <h5 class="step-label">
+                                    <span class="d-block">2. Enter Player ID</span>
+                                    <small class="d-block">২) প্লেয়ার একাউন্ট নাম্বার দিন</small>
+                                </h5>
                                 <div class="d-flex flex-column gap-1 mt-3">
                                     <div class="d-flex gap-2">
                                         <input type="text" id="player_id_input" class="form-control custom-input-glow"
@@ -158,7 +164,10 @@
                             </div>
 
                             <div class="info-step mb-3">
-                                <h5 class="step-label">3. Deposit Amount</h5>
+                                <h5 class="step-label">
+                                    <span class="d-block">3. Deposit Amount</span>
+                                    <small class="d-block">৩) ডিপোজিট পরিমাণ দিন</small>
+                                </h5>
                                 <div class="d-flex flex-column gap-1 mt-3">
                                     <div class="d-flex gap-2">
                                         <input type="number" id="deposit_amount_input"
@@ -174,7 +183,10 @@
                             </div>
 
                             <div class="info-step mb-3">
-                                <h5 class="step-label">4. Select Server your country</h5>
+                                <h5 class="step-label">
+                                    <span class="d-block">4. Select Server</span>
+                                    <small class="d-block">৪) সার্ভার/দেশ সিলেক্ট করুন</small>
+                                </h5>
                                 <div class="mt-3">
                                     <select id="server_select" class="form-select custom-input-glow" name="server_name"
                                         required>
