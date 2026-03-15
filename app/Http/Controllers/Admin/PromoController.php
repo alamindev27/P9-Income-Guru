@@ -47,13 +47,6 @@ class PromoController extends Controller
             $data['icon'] = 'uploads/promo/' . $fileName;
         }
 
-        if ($request->hasFile('banner_image')) {
-            $file2 = $request->file('banner_image');
-            $fileName2 = time() . '_' . Str::random(10) . '.' . $file2->getClientOriginalExtension();
-            $file2->move(public_path('uploads/promo/banner/'), $fileName2);
-            $data['banner_image'] = 'uploads/promo/banner/' . $fileName2;
-        }
-
         Promo::create($data);
 
         return redirect()->route('admin.promos.index')
@@ -101,16 +94,7 @@ class PromoController extends Controller
             $data['icon'] = 'uploads/promo/' . $fileName;
         }
 
-        if ($request->hasFile('banner_image')) {
-            if ($promo->banner_image && file_exists(public_path($promo->banner_image))) {
-                unlink(public_path($promo->banner_image));
-            }
-
-            $file2 = $request->file('banner_image');
-            $fileName2 = time() . '_' . Str::random(10) . '.' . $file2->getClientOriginalExtension();
-            $file2->move(public_path('uploads/promo/banner/'), $fileName2);
-            $data['banner_image'] = 'uploads/promo/banner/' . $fileName2;
-        }
+        
 
         $promo->update($data);
 
@@ -127,9 +111,6 @@ class PromoController extends Controller
         // পুরানো image delete
         if ($promo->icon && file_exists(public_path($promo->icon))) {
             unlink(public_path($promo->icon));
-        }
-        if ($promo->banner_image && file_exists(public_path($promo->banner_image))) {
-            unlink(public_path($promo->banner_image));
         }
         $promo->delete();
         return redirect()->route('admin.promos.index')->with('success', 'Promo deleted successfully.');

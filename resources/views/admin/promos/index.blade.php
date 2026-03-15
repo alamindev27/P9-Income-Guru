@@ -51,8 +51,8 @@
                                                 <a href="{{ $item->link }}" target="_blank">Click Here</a>
                                             </td>
                                             <td>
-                                                <img src="{{ asset($item->icon) }}" alt="{{ $item->name }}" width="80"
-                                                    height="30">
+                                                <img src="{{ asset($item->icon) }}" alt="{{ $item->name }}" width="50"
+                                                    height="50" class="rounded-circle border p-1">
                                             </td>
                                             <td>
                                                 <a href="{{ route('admin.promos.edit', $item->id) }}" class="btn btn-sm btn-primary">Edit</a>

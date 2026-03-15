@@ -4,7 +4,7 @@
     <style>
         /* YouTube Specific Styles */
         .youtube-list {
-            background-color: var(--dark-gray-color);
+            /* background-color: var(--dark-gray-color); */
             /* #121212 */
         }
 
@@ -88,7 +88,6 @@
                         <a href="{{ route('frontend.video.watch', $item->slug) }}" class="video-card text-decoration-none">
                             <div class="thumbnail-box">
                                 <img src="{{ asset($item->thumbnail) }}" class="img-fluid rounded-3" alt="Thumbnail">
-                                {{-- <span class="video-duration">{{ $duration }}</span> --}}
                             </div>
                             <div class="video-info-container d-flex mt-2">
                                 <div class="channel-logo">
@@ -96,10 +95,7 @@
                                 </div>
                                 <div class="video-details ms-3">
                                     <h6 class="video-title">{{ $item->title }}</h6>
-                                    <p class="channel-name">{{ setting()->author_name }} <i
-                                            class="bi bi-check-circle-fill"></i></p>
-                                    {{-- <p class="video-meta">{{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</p> --}}
-                                    {{-- <p class="video-meta">859K views • {{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</p> --}}
+                                    <p class="channel-name">{{ setting()->author_name }} <i class="bi bi-check-circle-fill"></i></p>
                                 </div>
                             </div>
                         </a>

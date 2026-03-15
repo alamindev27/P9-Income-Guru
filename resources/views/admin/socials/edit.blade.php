@@ -27,14 +27,7 @@
                             @csrf
                             @method('PUT')
                             <div class="row">
-                                <div class="form-group col-lg-12">
-                                    <label for="subscriber">{{ $data->name }} Subscribers <small class="text-danger">*</small></label>
-                                    <input type="text" class="form-control" placeholder="Subscribers" name="subscriber"
-                                        required id="subscriber" value="{{ old('subscriber', $data->subscriber) }}">
-                                    @error('subscriber')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
+                                
                                 <div class="form-group col-lg-12">
                                     <label for="link">{{ $data->name }} Link <small class="text-danger">*</small></label>
                                     <input type="text" class="form-control" placeholder="Link" name="link"
@@ -43,16 +36,7 @@
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                <div class="form-group col-lg-12">
-                                    <label for="status">{{ $data->name }} Status <small class="text-danger">*</small></label>
-                                    <select name="status" id="status" class="form-control">
-                                        <option value="active" {{ old('status', $data->status) == 'active' ? 'selected' : '' }}>Active</option>
-                                        <option value="inactive" {{ old('status', $data->status) == 'inactive' ? 'selected' : '' }}>Inactive</option>
-                                    </select>
-                                    @error('status')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
+                                
 
 
                                 <div class="col-12 text-center">

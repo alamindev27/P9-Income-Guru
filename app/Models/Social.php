@@ -10,7 +10,7 @@ class Social extends Model
     protected $guarded = [];
     protected static function booted()
     {
-        static::saved(fn() => Cache::forget('socials'));
-        static::deleted(fn() => Cache::forget('socials'));
+        static::saved(fn() => Cache::forget('social'));
+        static::deleted(fn() => Cache::forget('social'));
     }
 }

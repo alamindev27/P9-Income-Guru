@@ -1,198 +1,324 @@
 @extends('frontend.layouts.app')
-
 @section('head')
-    <link rel="preload" as="image" href="{{ asset($banner->image) }}">
-    @include('frontend.layouts.partials.index-style')
+    <link rel="stylesheet" href="{{ asset('frontend/css/index.css') }}">
 @endsection
-
 @section('content')
-    <section class="prediction-section py-1">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center text-center">
-                <div class="col-md-10 offset-md-1">
-                    <div class="hero-content">
-                        <h1 class="hero-title fw-bold mb-3">
-                            {{ $banner->heading_1 }} <span class="highlight-text">{{ $banner->heading_2 }}</span>
-                        </h1>
-                        <p class="hero-description mx-auto mb-4">{{ $banner->short_description }}</p>
-                    </div>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-12">
+                <div class="text-white mt-3 bg-dark rounded py-2">
+                    <marquee behavior="scroll" direction="left" class="fw-bold">{{ $intro->animated_text }}</marquee>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <section class="py-1">
-        <div class="container">
-            <div class="row justify-content-center align-items-center">
-                <div class="col-12 col-lg-6">
-                    <img src="{{ asset($banner->image) }}" alt="" class="img-fluid w-100" style="border: 2px solid #3498db; border-radius: 10px;">
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <section class="prediction-section py-3">
-        <div class="container text-center">
-
-            <div class="d-flex justify-content-center gap-3 my-4">
-                @if (isset(setting()->voice) && file_exists(public_path(setting()->voice)))
-                    <div class="" class="">
-                        <audio controls
-                            style="border: 2px solid #3498db; border-radius: 30px; box-shadow: 0 0 35px rgba(0, 210, 255, 0.6);">
-                            <source src="{{ asset(setting()->voice) }}" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                    </div>
-                @endif
+            <div class="col-12 text-center mt-3 mx-auto">
+                <div class="bengali-text">{{ $intro->heading_1 }}</div>
+                <div class="amount-text">{{ $intro->heading_2 }}</div>
             </div>
 
-            <div class="d-flex justify-content-center gap-3 mb-4">
-                <a href="{{ route('frontend.videos') }}" class="btn btn-next-1 btn-sm">একাউন্ট খোলার Tutorials দেখুন</a>
+
+            <div class="col-12 col-lg-6 mx-auto">
+                <img src="{{ asset($intro->image) }}" alt="" class="img-fluid w-100"
+                    style="border: 2px solid #3498db; border-radius: 10px;">
             </div>
 
-            <div class="intro-text mb-4">
-                <small>Welcome to the ultimate Thimbles prediction experience. Use our advanced system to predict
-                    outcomes
-                    and maximize your winning potential.</small>
+            <div class="col-12 text-center mt-3 mx-auto">
+
+                <button class="claim-btn" data-bs-toggle="modal" data-bs-target="#registrationModal">
+                    Claim Today's Free Multi 🔥
+                </button>
+                <a href="{{ $intro->winning_link }}" target="_blank" class="footer-link">Previous উইনিং প্রুফ চেক করুন</a>
+
             </div>
 
-            <div class="alert-box mb-3">
-                <small><span class="text-warning">⚠️ Important:</span> You must register using one of the links below
-                    and
-                    deposit $20 to activate your promo code.</small>
-            </div>
-
-            <div class="promo-container mx-auto">
+            <div class="col-12 text-center mt-2">
 
 
-                <div class="row align-items-center mb-2 g-2">
-                    @forelse ($promos as $item)
-                        <div class="col-lg-6">
-                            <div class="promo-code-box d-flex align-items-center justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <span class="hand-icon me-2">👉</span>
-                                    <a href="{{ $item->link }}" target="_blank" title="{{ $item->name }}">
-                                        <img src="{{ asset($item->icon) }}" alt="">
-                                    </a>
+                <div class="proof-card p-2">
+                    <div class="text-center">
+                        <div class="d-flex justify-content-center">
+                            @if (isset(setting()->voice) && file_exists(public_path(setting()->voice)))
+                                <div>
+                                    <audio controls
+                                        style="border: 2px solid #3498db; border-radius: 30px; box-shadow: 0 0 35px rgba(0, 210, 255, 0.6);">
+                                        <source src="{{ asset(setting()->voice) }}" type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
                                 </div>
+                            @endif
+                        </div>
+                        <small class=" mb-0 text-danger" style="font-size: 0.9rem; ">
+                            <i>বিস্তারিত জানে সম্পূর্ণ ভয়েজ টি শুনুন</i>
+                        </small>
+                    </div>
+                </div>
 
-                                <span style="font-size: 17px;">Promo code:
-                                    <span class="code" id="code-{{ $loop->index }}">{{ $item->promo_code }}</span>
+            </div>
 
-                                    <span class="copy-wrapper" onclick="copyToClipboard('{{ $item->promo_code }}', this)">
-                                        <span class="copy-tooltip">Copied!</span>
-                                        <span class="copy-btn" style="cursor: pointer;">
-                                            {{-- Default Icon --}}
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z" />
-                                                <path
-                                                    d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z" />
-                                            </svg>
-                                        </span>
+            <div class="col-12 text-center mt-3 mx-auto">
+                <div class="timer-box" id="timerContainer" data-id="{{ setting()->updated_at }}">
+                    <div class="time-unit"><span class="green-num" id="hours">{{ setting()->timer['hours'] }}</span> Hrs
+                    </div>
+                    <div class="timer-divider">|</div>
+                    <div class="time-unit"><span class="purple-num" id="minutes">{{ setting()->timer['minutes'] }}</span>
+                        Min</div>
+                    <div class="timer-divider">|</div>
+                    <div class="time-unit"><span class="yellow-num" id="seconds">{{ setting()->timer['seconds'] }}</span>
+                        Sec</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 text-center mt-3 mx-auto">
+            <p class="text-white mb-2">একাউন্ট খোলার Tutorials দেখুন</p>
+            <div class="text-center">
+                <button class="watch-btn" onclick="return window.location.href='{{ route('frontend.videos') }}'">
+                    <span class="icon">▶</span>
+                    Watch Now
+                </button>
+            </div>
+        </div>
+
+        <div class="col-12 text-center mt-3 mx-auto">
+
+            <div class="proof-card p-2">
+                @forelse ($promos as $item)
+                    <div class="result-row d-flex justify-content-between gap-2 align-items-center px-2">
+                        <span class="day-text d-flex justify-content-start gap-3 align-items-center">
+                            <a href="{{ $item->link }}" target="_blank" title="{{ $item->name }}">
+                                <img src="{{ asset($item->icon) }}" alt="" class="img-fluid rounded-circle"
+                                    style="vertical-align: middle; box-shadow:0px 0px 15px 0px #3498db" width="40"
+                                    height="40">
+                            </a>
+                            <span class="day-text fw-bold" style="font-size: 17px;">Promo Code - </span>
+                        </span>
+                        <span class="win-text">
+                            <span class="d-flex justify-content-end gap-1 align-items-center">
+                                <span style="color:#ffd700; font-size:21px;">{{ $item->promo_code }}</span>
+                                <span class="copy-wrapper" onclick="copyToClipboard('{{ $item->promo_code }}', this)">
+                                    <span class="copy-tooltip">Copied!</span>
+                                    <span class="copy-btn" style="cursor: pointer;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                            fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+                                            <path
+                                                d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z" />
+                                            <path
+                                                d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z" />
+                                        </svg>
                                     </span>
                                 </span>
-                            </div>
-                        </div>
-                    @empty
-                        <div class="col-12">
-                            <div class="alert alert-bg-color mb-0">No promo codes available at the moment.</div>
-                        </div>
-                    @endforelse
-                </div>
-            </div>
-            {{-- <button class="btn btn-next mt-2">Next</button> --}}
-            <button class="btn-next mt-2" data-bs-toggle="modal" data-bs-target="#registrationModal">Next</button>
-
-            <div class="modal fade" id="registrationModal" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content custom-modal-bg">
-                        <div class="modal-body text-center p-5">
-                            <h4 class="modal-title-custom mb-3">Registration Check</h4>
-                            <p class="modal-text-custom mb-4">Did you register through one of the links?</p>
-
-                            <div class="d-flex justify-content-center gap-3">
-                                <button onclick="return window.location.href='{{ route('frontend.verify.player') }}'"
-                                    class="btn-modal btn-yes d-flex align-items-center justify-content-center">
-                                    <span class="me-2">✅</span> Yes
-                                </button>
-                                <button class="btn-modal btn-no d-flex align-items-center justify-content-center"
-                                    data-bs-dismiss="modal">
-                                    <span class="me-2">❌</span> No
-                                </button>
-                            </div>
-                        </div>
+                            </span>
+                        </span>
                     </div>
+                @empty
+                    <div class="col-12 mt-4 mx-auto">
+                        <div class="alert alert-info mb-0 text-dark">No promo codes available at the moment.</div>
+                    </div>
+                @endforelse
+            </div>
+
+        </div>
+
+        <div class="col-12 text-center mt-3 mx-auto">
+
+            <div class="entry-count">
+                Only 50 Free Entries Today! <span class="pink-text">(28 Left)</span>
+            </div>
+
+            <div class="step-container">
+                <div class="step-box">
+                    <div class="step-title step-1-color">Step 1</div>
+                    <div class="step-icon">📇</div>
+                    <div class="step-desc"><span class="yellow-highlight">1</span> Sign Up</div>
+                </div>
+                <div class="step-box">
+                    <div class="step-title step-2-color">Step 2</div>
+                    <div class="step-icon">💼</div>
+                    <div class="step-desc"><span class="yellow-highlight">2</span> Deposit</div>
+                </div>
+                <div class="step-box">
+                    <div class="step-title step-3-color">Step 3</div>
+                    <div class="step-icon">⚽</div>
+                    <div class="step-desc">Get Free Multi</div>
                 </div>
             </div>
+
         </div>
-    </section>
 
-    <section class="social-media-section py-3">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h3 class="section-title text-white fw-bold">Connect With Us</h3>
-                {{-- <p class="text-secondary">Stay updated with our latest news and predictions on social media.</p> --}}
-            </div>
+        <div class="col-12 text-center mt-3 mx-auto">
 
-            <div class="row g-4 justify-content-center">
-                @foreach ($socials as $item)
-                    <div class="col-6 col-md-3">
-                        <a href="{{ $item->link }}" class="social-card {{ Str::slug($item->name) }}" target="_blank">
+            <div class="proof-card p-2">
+                <div class="proof-title">Proof Your Bankroll in <span class="yellow-highlight">3 Easy</span>
+                </div>
 
-                            <div class="social-icon-box">
-                                {!! $item->icon !!}
-                            </div>
-                            <h5>{{ $item->name }}</h5>
-                            <p>{{ $item->subscriber }}</p>
-                        </a>
+                @foreach ($proofs as $item)
+                    <div class="result-row">
+                        <span class="day-text">🕒 {{ $item->time }}:</span>
+                        @if ($item->status == 'WIN')
+                            <span class="win-text">WIN <span class="status-icon win-icon">✔</span>
+                            @elseif ($item->status == 'LOSS' || $item->status == 'DRAW')
+                                <span class="loss-text">LOSS <span class="status-icon loss-icon">✖</span>
+                        @endif
+                        </span>
                     </div>
                 @endforeach
+            </div>
 
+        </div>
+
+        <div class="col-12 text-center mt-3 mx-auto">
+            <div class="proof-card p-2">
+                <div class="proof-title">Our Member and <span class="yellow-highlight">Winning Amount</span> </div>
+                <div class="stats-container">
+                    <div class="stat-row">
+                        <div class="d-flex justify-content-start align-items-center">
+                            <span class="stat-value yellow-text counter"
+                                data-target="{{ setting()->total_members }}">0</span>
+                            <span class="stat-value yellow-text">+</span>
+                        </div>
+                        <span class="divider-line">|</span>
+                        <span class="stat-label">Total Members</span>
+                    </div>
+                    <div class="stat-row">
+                        <div class="d-flex justify-content-start align-items-center">
+                            <span class="stat-value green-text">Tk. </span><span class="stat-value green-text counter"
+                                data-target="{{ setting()->total_won }}">0</span><span
+                                class="stat-value green-text">+</span>
+                        </div>
+                        <span class="divider-line">|</span>
+                        <span class="stat-label">Total Won</span>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
+
+        <div class="col-12 text-center mt-3 mx-auto">
+
+            <div class="badge-container">
+                <div class="badge-icon-circle">#1</div>
+                <div class="badge-text">
+                    <div class="badge-text-top">Bangladesh #1 Free Multi</div>
+                    <div class="badge-text-bottom">Community 💸 🔥</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-12 text-center mt-3 mx-auto">
+
+            <button class="final-claim-btn" data-bs-toggle="modal" data-bs-target="#registrationModal">
+                <span>🔥</span> Claim Now Free
+            </button>
+        </div>
+
+        <div class="col-12 mt-4">
+            <div class="proof-card p-2">
+                <div class="proof-title mb-3 text-center">Winning <span class="yellow-highlight">Screenshots</span></div>
+
+                <div id="screenshotSlider" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @foreach ($reviews as $item)
+                            <div class="carousel-item {{ $loop->index == 0 ? 'active' : '' }}"
+                                data-description="{{ $item->description }}" data-img-url="{{ asset($item->image) }}"
+                                onclick="openProofModal(this)" style="cursor: pointer;">
+                                <div class="review-box text-center p-2">
+                                    <p class="review-short-text">
+                                        "{{ \Illuminate\Support\Str::limit($item->description, 50) }}"</p>
+                                    <div class="screenshot-wrapper">
+                                        <img src="{{ asset($item->image) }}" class="img-fluid rounded shadow-sm"
+                                            alt="Proof 1">
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#screenshotSlider"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon small-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#screenshotSlider"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon small-icon"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="proofModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content"
+                    style="background: #0a1e2e; border: 1.5px solid #1a5a8a; border-radius: 20px; overflow: hidden;">
+
+                    <div class="modal-header border-0 pb-0">
+                        <p class="modal-title text-warning w-100 text-justify" id="modalText"
+                            style="text-align: justify; text-align-last: justify; margin-bottom: 10px;">Winning Proof</p>
+                    </div>
+
+                    <div class="modal-body text-center pt-2">
+                        <div class="modal-img-container">
+                            <img src="" id="modalImage" class="img-fluid rounded shadow-lg border"
+                                style="max-height: 70vh; border: 1px solid #222;">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer border-0 d-flex justify-content-center pt-0 pb-4">
+                        <button type="button" class="btn btn-close-custom" data-bs-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 text-center mt-3 mx-auto">
+            <div class="proof-card p-2">
+                <div class="proof-title">Join Our Official <span class="yellow-highlight">Teligram Chanel</span> </div>
+                <div class="stats-container">
+                    <a href="{{ social()->link }}" title="{{ social()->name }}">{!! social()->icon !!}</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="registrationModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content custom-modal-bg">
+                    <div class="modal-body text-center p-5">
+                        <h4 class="modal-title-custom mb-3">Registration Check</h4>
+                        <p class="modal-text-custom mb-4">Did you register through one of the links?</p>
+
+                        <div class="d-flex justify-content-center gap-3">
+                            <button onclick="return window.location.href='{{ route('frontend.verify.player') }}'"
+                                class="btn-modal btn-yes d-flex align-items-center justify-content-center">
+                                <span class="me-2">✅</span> Yes
+                            </button>
+                            <button class="btn-modal btn-no d-flex align-items-center justify-content-center"
+                                data-bs-dismiss="modal">
+                                <span class="me-2">❌</span> No
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <br><br>
 @endsection
-
 @section('footer')
+    <script src="{{ asset('frontend/js/index.js') }}"></script>
     <script>
-        function copyToClipboard(text, element) {
-            const originalIcon =
-                `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/></svg>`;
-            const successIcon =
-                `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16"><path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708"/></svg>`;
+        function openProofModal(el) {
+            // Modal er content update kora
+            document.getElementById('modalText').innerText = el.getAttribute('data-description');
+            document.getElementById('modalImage').src = el.getAttribute('data-img-url');
 
-            const btn = element.querySelector('.copy-btn');
-
-            // Clipboard Copy Logic
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(text).then(showSuccess);
-            } else {
-                let textArea = document.createElement("textarea");
-                textArea.value = text;
-                document.body.appendChild(textArea);
-                textArea.select();
-                try {
-                    document.execCommand('copy');
-                    showSuccess();
-                } catch (err) {}
-                textArea.remove();
-            }
-
-            function showSuccess() {
-                // Show Tooltip & Change Icon
-                element.classList.add('show-tooltip');
-                btn.innerHTML = successIcon;
-                btn.style.color = "#28a745";
-
-                // Reset after 1.5 seconds
-                setTimeout(() => {
-                    element.classList.remove('show-tooltip');
-                    btn.innerHTML = originalIcon;
-                    btn.style.color = "";
-                }, 1500);
-            }
+            // Bootstrap Modal open kora
+            var myModal = new bootstrap.Modal(document.getElementById('proofModal'));
+            myModal.show();
         }
     </script>
 @endsection

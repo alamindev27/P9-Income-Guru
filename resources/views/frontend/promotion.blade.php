@@ -1,5 +1,7 @@
 @extends('frontend.layouts.app')
+
 @section('head')
+    <link rel="stylesheet" href="{{ asset('frontend/css/index.css') }}">
     <style>
         .section-title-glow {
             color: var(--deep-color);
@@ -104,32 +106,39 @@
             margin-right: 0px;
         }
     </style>
-
     <link rel="preload" as="image" href="{{ asset('frontend/img/click-button.png') }}">
 @endsection
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="section-title-glow my-3 text-center">সঠিক ভাবে প্রমোকোড ব্যাবহার করে একাউন্ট অপেন না করলে মাল্টির কোড আসবে না!</h2>
-
-                <div class="alert alert-bg-color">
-                    <marquee behavior="scroll" direction="" class="text-white py-0 fw-bold" style="font-size: 17px;">অবশ্যই আপনার খুলা একাউন্ট টি ভেরিফাইড থাকতে হবে এবং মিনিমাম ১০০০ টাকা ডিপোজিট করতে হবে</marquee>
+        <div class="row justify-content-center">
+            <div class="col-12 text-center mt-3 mx-auto">
+                <div class="proof-card p-2">
+                    <h2 class="section-title-glow my-3 text-center">{{ $promotionData->heading_top }}</h2>
                 </div>
+            </div>
+            <div class="col-md-12 mt-3">
+                <div class="alert alert-bg-color">
+                    <marquee behavior="scroll" direction="" class="text-white py-0 fw-bold" style="font-size: 17px;">{{ $promotionData->animated_text }}</marquee>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <img src="{{asset($promotionData->banner)}}" alt="" class="img-fluid rounded border mb-3 w-100">
             </div>
 
 
             @forelse ($datas as $item)
                 <div class="col-lg-6 mt-3">
-                    <img src="{{ $item->banner_image ? asset($item->banner_image) : 'https://placehold.co/708x310?text=' . $item->name . '  ' }}"
-                        alt="{{ $item->name }}" class="img-fluid rounded border mb-3">
-                    <div class="promo-code-box d-flex align-items-center justify-content-between text-center gap-1" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#promoErrorModal">
+                    <div class="promo-code-box d-flex align-items-center justify-content-between text-center gap-1"
+                        style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#promoErrorModal">
                         <div class="text-center mx-auto">
-                            <img src="{{ asset($item->icon) }}" alt="{{ $item->name }}" style="" class="img-fluid">
+                            <img src="{{ asset($item->icon) }}" alt="{{ $item->name }}" style=""
+                                class="img-fluid rounded-circle py-1" width="50" height="50">
                         </div>
                         <p class="text-nowrap mb-0 fw-bold" style="font-size: 20px;">Get Code</p>
                         <div class="text-center mx-auto">
-                            <img src="{{ asset('frontend/img/click-button.png') }}" alt="{{ $item->name }}" class="img-fluid">
+                            <img src="{{ asset('frontend/img/click-button.png') }}" alt="{{ $item->name }}"
+                                class="img-fluid">
                         </div>
                     </div>
                     <hr class="text-white mt-4">
@@ -139,9 +148,6 @@
                     <div class="alert alert-bg-color mb-0">No promo codes available at the moment.</div>
                 </div>
             @endforelse
-
-
-
 
             <div class="modal fade" id="promoErrorModal" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -171,7 +177,25 @@
 
 
 
+
+            <div class="col-12 text-center mt-3 mx-auto">
+                <div class="proof-card p-2">
+                    <h2 class="section-title-glow">{{$promotionData->heading_bottom}}</h2>
+                </div>
+            </div>
+
+            <div class="col-12 text-center mt-3 mx-auto">
+                <div class="proof-card p-2">
+                    <div class="proof-title">Join Our Official <span class="yellow-highlight">Teligram Chanel</span> </div>
+                    <div class="stats-container">
+                        <a href="{{social()->link}}" title="{{social()->name}}">{!! social()->icon !!}</a>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
+        <br>
     </div>
 @endsection
 @section('footer')

@@ -13,13 +13,14 @@
     --deep-color: #E0E0E0;
 }
 
-.alert-bg-color{
+.alert-bg-color {
     background-color: var(--medium-dark-color);
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--dark-gray-color);
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: radial-gradient(circle at center, #1a2a3a 0%, #050a0f 100%);
 }
 
 
@@ -205,6 +206,7 @@ body {
     border: none;
     transition: 0.3s;
 }
+
 .btn-next {
     background: #3498db;
     color: white;

@@ -8,7 +8,6 @@
             text-align: center;
         }
     </style>
-    {{-- <link href="{{ asset('backend/assets') }}/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet"> --}}
 @endsection
 @section('content')
     <div class="page-breadcrumb">
@@ -34,9 +33,7 @@
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Subscribers</th>
                                         <th>Link</th>
-                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -49,17 +46,10 @@
                                                     <b class="ml-3">{{ $item->name }}</b>
                                                 </div>
                                             </td>
-                                            <td>{{ $item->subscriber }}</td>
                                             <td>
                                                 <a href="{{ $item->link }}" target="_blank">Click Here</a>
                                             </td>
-                                            <td>
-                                                @if ($item->status == 'active')
-                                                    <span class="badge badge-success">Active</span>
-                                                @else
-                                                    <span class="badge badge-danger">Inactive</span>
-                                                @endif
-                                            </td>
+                                            
                                             <td>
                                                 <a href="{{ route('admin.socials.edit', $item->id) }}" class="btn btn-sm btn-primary">Edit</a>
                                             </td>
@@ -80,6 +70,4 @@
     </div>
 @endsection
 @section('scripts')
-    {{-- <script src="{{ asset('backend/assets') }}/extra-libs/DataTables/datatables.min.js"></script>
-    <script src="{{ asset('backend/dist') }}/js/pages/datatable/datatable-basic.init.js"></script> --}}
 @endsection

@@ -38,9 +38,9 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link " href="{{ route('admin.banners.index') }}"
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link " href="{{ route('admin.intro.index') }}"
                         aria-expanded="false">
-                        <span class="hide-menu">Banners</span>
+                        <span class="hide-menu">Intro</span>
                     </a>
                 </li>
 
@@ -59,6 +59,27 @@
                 </li>
 
                 <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link " href="{{ route('admin.proof.index') }}"
+                        aria-expanded="false">
+                        <span class="hide-menu">Proof</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link " href="{{ route('admin.member.Winning.edit') }}"
+                        aria-expanded="false">
+                        <span class="hide-menu">Members & Winning</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link " href="{{ route('admin.timer.edit') }}"
+                        aria-expanded="false">
+                        <span class="hide-menu">Timer</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link " href="{{ route('admin.socials.index') }}"
                         aria-expanded="false">
                         <span class="hide-menu">Socials</span>
@@ -69,6 +90,20 @@
                     <a class="sidebar-link waves-effect waves-dark sidebar-link " href="{{ route('admin.voice.edit') }}"
                         aria-expanded="false">
                         <span class="hide-menu">Voice</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link " href="{{ route('admin.promotional.edit', 1) }}"
+                        aria-expanded="false">
+                        <span class="hide-menu">Promotional</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link " href="{{ route('admin.reviews.index') }}"
+                        aria-expanded="false">
+                        <span class="hide-menu">Reviews</span>
                     </a>
                 </li>
 

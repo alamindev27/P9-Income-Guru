@@ -15,10 +15,36 @@
 
         <div class="row">
 
-            {{-- content will be here --}}
+            <div class="col-12">
+                <div class="row justify-content-center">
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card info-card sales-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Promos</h5>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <h6>{{ $totalPromos < 9 ? '0' . $totalPromos : $totalPromos }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-6">
+                        <div class="card info-card sales-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Videos</h5>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <h6>{{ $totalVideos < 9 ? '0' . $totalVideos : $totalVideos }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+            </div>
         </div>
-    </div>
-@endsection
-@section('footer')
-@endsection
+    @endsection
+    @section('footer')
+    @endsection

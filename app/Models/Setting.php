@@ -14,4 +14,8 @@ class Setting extends Model
         static::saved(fn() => Cache::forget('app_setting'));
         static::deleted(fn() => Cache::forget('app_setting'));
     }
+
+    protected $casts = [
+        'timer' => 'array',
+    ];
 }

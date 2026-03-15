@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Setting;
+use App\Models\Social;
 use Illuminate\Support\Facades\Cache;
 
 if (!function_exists('setting')) {
@@ -12,8 +13,21 @@ if (!function_exists('setting')) {
                 'site_name',
                 'logo',
                 'favicon',
-                'voice'
+                'voice',
+                'total_members',
+                'total_won',
+                'timer',
+                'updated_at'
             ])->first();
+        });
+    }
+}
+
+if (!function_exists('social')) {
+    function social()
+    {
+        return Cache::rememberForever('social', function () {
+            return Social::first();
         });
     }
 }

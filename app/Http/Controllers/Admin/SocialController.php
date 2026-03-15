@@ -57,8 +57,6 @@ class SocialController extends Controller
     {
         $request->validate([
             'link' => 'required|url|max:255',
-            'subscriber' => 'required|string|max:255',
-            'status' => 'required|in:active,inactive',
         ]);
 
         $data = Social::findOrFail($id);

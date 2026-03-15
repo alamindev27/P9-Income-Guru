@@ -15,9 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('link');
-            $table->string('subscriber')->nullable();
             $table->longText('icon');
-            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
     }

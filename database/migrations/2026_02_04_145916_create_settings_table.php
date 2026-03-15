@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('site_name')->default('Income Guru');
+            $table->string('site_name')->default('Income Guru Offc');
             $table->string('author_name')->nullable();
+            $table->float('total_members', 15, 2)->default(16530);
+            $table->float('total_won', 15, 2)->default(5182500);
+            $table->json('timer');
             $table->string('logo')->default('default/logo.png');
             $table->string('favicon')->default('default/favicon.png');
             $table->string('voice')->nullable();

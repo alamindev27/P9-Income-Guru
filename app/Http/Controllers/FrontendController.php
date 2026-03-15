@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Banner;
+use App\Models\Intro;
 use App\Models\Promo;
+use App\Models\Promotion;
+use App\Models\Proof;
+use App\Models\Review;
 use App\Models\Social;
 use App\Models\Video;
 use Illuminate\Http\Request;
@@ -14,19 +17,27 @@ class FrontendController extends Controller
     public function index()
     {
 
-        $banner = Cache::rememberForever('banner', function () {
-            return Banner::select(['heading_1', 'heading_2', 'short_description', 'image'])->first();
+        $intro = Cache::rememberForever('intro', function () {
+            return Intro::select(['heading_1', 'heading_2', 'animated_text', 'image', 'winning_link'])->first();
         });
 
         $promos = Cache::rememberForever('promos', function () {
             return Promo::select(['name', 'icon', 'link', 'promo_code'])->get();
         });
 
-        $socials = Cache::rememberForever('socials', function () {
-            return Social::where('status', 'active')->select(['name', 'link', 'subscriber', 'icon'])->get();
+        $proofs = Cache::rememberForever('proofs', function () {
+            return Proof::select(['time', 'status'])->latest()->limit(3)->get();
         });
 
-        return view('frontend.index', compact('banner', 'promos', 'socials'));
+        $socials = Cache::rememberForever('socials', function () {
+            return Social::select(['name', 'link', 'icon'])->get();
+        });
+
+        $reviews = Cache::rememberForever('reviews', function () {
+            return Review::select(['description', 'image'])->get();
+        });
+
+        return view('frontend.index', compact('intro', 'promos', 'socials', 'proofs', 'reviews'));
     }
 
     public function videos()
@@ -81,8 +92,12 @@ class FrontendController extends Controller
         ) {
             return redirect()->route('frontend.verify.player');
         }
-        $datas = Promo::select(['id', 'name', 'icon', 'promo_code', 'banner_image'])->get();
+        $datas = Promo::select(['id', 'name', 'icon', 'promo_code'])->get();
 
-        return view('frontend.promotion', compact('promotion', 'datas'));
+        $promotionData = Cache::rememberForever('promotion', function () {
+            return Promotion::first();
+        });
+
+        return view('frontend.promotion', compact('promotion', 'datas', 'promotionData'));
     }
 }

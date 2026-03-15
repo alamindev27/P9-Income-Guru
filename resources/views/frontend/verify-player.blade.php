@@ -1,16 +1,12 @@
 @extends('frontend.layouts.app')
 @section('head')
     <style>
-        /* Info Selection Section Styles */
-        .info-selection-section {
-            color: var(--deep-color);
-        }
-
         .section-title-glow {
             color: var(--deep-color);
             font-size: 2rem;
             font-weight: 800;
             text-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
+            text-align: center;
         }
 
         .step-label {
@@ -80,12 +76,6 @@
         }
 
 
-
-
-
-
-
-
         .custom-input-glow:focus {
             box-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
             background-color: #000;
@@ -106,19 +96,27 @@
             opacity: 1;
             transform: translateY(-2px);
         }
+
+        .proof-card {
+            border: 1px solid #1a5a8a;
+            border-radius: 15px;
+            background: rgba(0, 5, 15, 0.8);
+            box-shadow: inset 0 0 15px rgba(0, 150, 255, 0.2);
+        }
     </style>
 @endsection
 @section('content')
-    <section class="info-selection-section py-3">
-        <div class="container text-center">
-            <div class="card" style="background: var(--medium-dark-color)">
-                <div class="card-body pb-4">
+    <div class="container">
+        <br>
+        <div class="row">
+            <div class="col-12">
+                <div class="proof-card p-3">
                     <h2 class="section-title-glow mb-3">Select your infos</h2>
                     <form id="infoForm" action="{{ route('frontend.player.promotion') }}" method="POST">
                         @csrf
                         <input type="text" id="promo_id" name="promo_id" value="" hidden>
 
-                        <div class="info-form-wrapper mx-auto text-start" style="max-width: 600px;">
+                        <div class="info-form-wrapper mx-auto text-start">
 
                             <div class="info-step mb-3">
                                 <h5 class="step-label">
@@ -127,10 +125,11 @@
                                 </h5>
                                 <div class="row justify-content-center">
                                     @foreach ($datas as $item)
-                                        <div class="col-6 col-md-3 bookmaker-logo text-center mt-3 px-1"
+                                        <div class="col bookmaker-logo text-center mt-3 px-1"
                                             onclick="setBookmarker('{{ $item->id }}', this)">
-                                            <img src="{{ asset($item->icon) }}" alt="{{ $item->name }}" class="img-fluid"
-                                                style="height: 40px; width:100%; object-fit: contain; cursor: pointer;">
+                                            <img src="{{ asset($item->icon) }}" alt="{{ $item->name }}"
+                                                class="img-fluid rounded border"
+                                                style="height: 40px; width:40px;  object-fit: contain; cursor: pointer;">
                                         </div>
                                     @endforeach
                                 </div>
@@ -401,16 +400,24 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="proof-card p-2">
+                                <div class="text-center">
+                                    <small class=" mb-0 text-danger" style="font-size: 0.6rem; text-shadow: 0 0 15px rgba(0, 210, 255, 0.6)">
+                                        <span style="font-size: 20px;">⚠️</span>
+                                        <span class="d-block">মাল্টির কোড সক্রিয় করতে আপনাকে আমাদের প্রমোকোড ব্যবহার করে রেজিষ্ট্রেশন করতে হবে এবং ১০০০৳ ডিপোজিট করতে হবে!</span> </small>
+                                </div>
+                            </div>
 
-                            <div class="text-center mt-5">
-                                <button type="submit" id="submit_btn" class="btn-start-game">Start Game</button>
+                            <div class="text-center mt-3">
+                                <button type="submit" id="submit_btn" class="btn-start-game">NEXT &raquo;</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    </section>
+        <br>
+    </div>
 @endsection
 @section('footer')
     <script>
@@ -448,8 +455,8 @@
                 });
 
                 element.style.filter = 'grayscale(0%) drop-shadow(0 0 8px #00d2ff)';
-                element.style.border = '1px solid #00d2ff';
-                element.style.borderRadius = '8px';
+                // element.style.border = '1px solid #00d2ff';
+                // element.style.borderRadius = '8px';
                 element.classList.add('selected-bookie');
 
                 // ভ্যালিডেশন ট্রিগার করার জন্য কাস্টম ইভেন্ট
