@@ -37,8 +37,8 @@
                      <input type="checkbox" class="custom-control-input" id="remember" name="remember"
                          {{ old('remember') ? 'checked' : '' }}>
                      <label class="custom-control-label" for="remember">Remember me</label>
-                     <a href="{{ route('password.request') }}" id="to-recover" class="text-dark float-right"><i
-                             class="fa fa-lock m-r-5"></i> Forgot pwd?</a>
+                     {{-- <a href="{{ route('password.request') }}" id="to-recover" class="text-dark float-right"><i
+                             class="fa fa-lock m-r-5"></i> Forgot pwd?</a> --}}
                  </div>
              </div>
          </div>
