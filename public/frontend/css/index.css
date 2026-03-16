@@ -139,7 +139,7 @@ body {
 
 .bengali-text {
     color: #ffffff;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     margin-bottom: -3px;
     font-family: "Hind Siliguri", sans-serif !important;
     font-weight: 700;
@@ -147,8 +147,7 @@ body {
 
 .amount-text {
     color: #ffcc00;
-    font-size: 1.7rem;
-    margin-bottom: 20px;
+    font-size: 1.5rem;
     font-family: "Hind Siliguri", sans-serif !important;
     font-weight: 700;
 }
@@ -590,3 +589,4 @@ body {
 #modalText {
     text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
 }
+
