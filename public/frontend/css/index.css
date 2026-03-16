@@ -2,6 +2,8 @@ body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: radial-gradient(circle at center, #1a2a3a 0%, #050a0f 100%);
+    font-family: "Hind Siliguri", sans-serif;
+
 }
 
 /* Tooltip wrapper */
@@ -137,15 +139,18 @@ body {
 
 .bengali-text {
     color: #ffffff;
-    font-size: 1.3rem;
-    margin-bottom: 10px;
+    font-size: 1.7rem;
+    margin-bottom: -3px;
+    font-family: "Hind Siliguri", sans-serif !important;
+    font-weight: 700;
 }
 
 .amount-text {
     color: #ffcc00;
-    font-weight: bold;
-    font-size: 2.2rem;
+    font-size: 1.7rem;
     margin-bottom: 20px;
+    font-family: "Hind Siliguri", sans-serif !important;
+    font-weight: 700;
 }
 
 /* Button Styling */

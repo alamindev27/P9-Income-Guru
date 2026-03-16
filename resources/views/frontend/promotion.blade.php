@@ -1,13 +1,19 @@
 @extends('frontend.layouts.app')
 
 @section('head')
-    <link rel="stylesheet" href="{{ asset('frontend/css/index.css') }}">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atma:wght@300;400;500;600;700&family=Baloo+Da+2:wght@400..800&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('frontend/css/index.css') }}">
+
     <style>
         .section-title-glow {
             color: var(--deep-color);
-            font-size: 2rem;
+            font-size: 1.2rem;
             font-weight: 800;
             text-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
+            font-family: "Hind Siliguri", sans-serif !important;
         }
 
         .alert {
@@ -113,41 +119,46 @@
         <div class="row justify-content-center">
             <div class="col-12 text-center mt-3 mx-auto">
                 <div class="proof-card p-2">
-                    <h2 class="section-title-glow my-3 text-center">{{ $promotionData->heading_top }}</h2>
+                    <h2 class="section-title-glow my-3 text-center">
+                        {{ $promotionData->heading_top }}</h2>
                 </div>
             </div>
             <div class="col-md-12 mt-3">
                 <div class="alert alert-bg-color">
-                    <marquee behavior="scroll" direction="" class="text-white py-0 fw-bold" style="font-size: 17px;">{{ $promotionData->animated_text }}</marquee>
+                    <marquee behavior="scroll" direction="" class="text-white py-0 fw-bold d-flex justify-content-center align-items-center" style="font-size: 17px; font-family: 'Hind Siliguri', sans-serif !important;">
+                        {{ $promotionData->animated_text }}</marquee>
                 </div>
             </div>
 
             <div class="col-12">
-                <img src="{{asset($promotionData->banner)}}" alt="" class="img-fluid rounded border mb-3 w-100">
+                <img src="{{ asset($promotionData->banner) }}" alt="" class="img-fluid rounded border mb-3 w-100">
             </div>
 
 
-            @forelse ($datas as $item)
-                <div class="col-lg-6 mt-3">
-                    <div class="promo-code-box d-flex align-items-center justify-content-between text-center gap-1"
-                        style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#promoErrorModal">
-                        <div class="text-center mx-auto">
-                            <img src="{{ asset($item->icon) }}" alt="{{ $item->name }}" style=""
-                                class="img-fluid rounded-circle py-1" width="50" height="50">
-                        </div>
-                        <p class="text-nowrap mb-0 fw-bold" style="font-size: 20px;">Get Code</p>
-                        <div class="text-center mx-auto">
-                            <img src="{{ asset('frontend/img/click-button.png') }}" alt="{{ $item->name }}"
-                                class="img-fluid">
-                        </div>
+            <div class="col-12">
+                <div class="proof-card p-2 pt-3">
+                    <div class="row justify-content-center">
+                        @forelse ($datas as $item)
+                            <div class="col-lg-6 mb-3">
+                                <div class="promo-code-box d-flex align-items-center justify-content-between text-center gap-1"
+                                    style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#promoErrorModal">
+                                    <div class="text-center mx-auto">
+                                        <img src="{{ asset($item->icon) }}" alt="{{ $item->name }}" style="" class="img-fluid rounded-circle py-1" width="50" height="50">
+                                    </div>
+                                    <p class="text-nowrap mb-0 fw-bold" style="font-size: 20px;">Get For Code - </p>
+                                    <div class="text-center mx-auto">
+                                        <img src="{{ asset('frontend/img/click-button.png') }}" alt="{{ $item->name }}" class="img-fluid" style="width: 120px; height: 50px; object-fit: contain;">
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="col-12">
+                                <div class="alert alert-bg-color mb-0">No promo codes available at the moment.</div>
+                            </div>
+                        @endforelse
                     </div>
-                    <hr class="text-white mt-4">
                 </div>
-            @empty
-                <div class="col-12">
-                    <div class="alert alert-bg-color mb-0">No promo codes available at the moment.</div>
-                </div>
-            @endforelse
+            </div>
 
             <div class="modal fade" id="promoErrorModal" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -180,7 +191,7 @@
 
             <div class="col-12 text-center mt-3 mx-auto">
                 <div class="proof-card p-2">
-                    <h2 class="section-title-glow">{{$promotionData->heading_bottom}}</h2>
+                    <h2 class="section-title-glow">{{ $promotionData->heading_bottom }}</h2>
                 </div>
             </div>
 
@@ -188,7 +199,7 @@
                 <div class="proof-card p-2">
                     <div class="proof-title">Join Our Official <span class="yellow-highlight">Teligram Chanel</span> </div>
                     <div class="stats-container">
-                        <a href="{{social()->link}}" title="{{social()->name}}">{!! social()->icon !!}</a>
+                        <a href="{{ social()->link }}" title="{{ social()->name }}">{!! social()->icon !!}</a>
                     </div>
                 </div>
             </div>

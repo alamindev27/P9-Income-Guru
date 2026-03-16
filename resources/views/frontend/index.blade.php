@@ -1,5 +1,9 @@
 @extends('frontend.layouts.app')
 @section('head')
+<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('frontend/css/index.css') }}">
 @endsection
 @section('content')
@@ -7,15 +11,17 @@
         <div class="row">
 
             <div class="col-12">
-                <div class="text-white mt-3 bg-dark rounded py-2">
-                    <marquee behavior="scroll" direction="left" class="fw-bold">{{ $intro->animated_text }}</marquee>
+                <div class="text-white mt-3 bg-dark rounded py-2 ">
+                    <marquee behavior="scroll" direction="left" class="fw-bold d-flex justify-content-center align-items-center" style="font-family: 'Hind Siliguri', sans-serif !important;">
+                        {{ $intro->animated_text }}
+                    </marquee>
                 </div>
             </div>
 
 
             <div class="col-12 text-center mt-3 mx-auto">
                 <div class="bengali-text">{{ $intro->heading_1 }}</div>
-                <div class="amount-text">{{ $intro->heading_2 }}</div>
+                <div class="amount-text" >{{ $intro->heading_2 }}</div>
             </div>
 
 
