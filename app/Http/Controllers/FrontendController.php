@@ -26,7 +26,7 @@ class FrontendController extends Controller
         });
 
         $proofs = Cache::rememberForever('proofs', function () {
-            return Proof::select(['time', 'status'])->latest()->limit(3)->get();
+            return Proof::select(['time', 'status'])->limit(3)->get();
         });
 
         $socials = Cache::rememberForever('socials', function () {
