@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('icon');
             $table->string('link');
             $table->string('promo_code');
+            $table->string('multi_code');
             $table->timestamps();
         });
     }

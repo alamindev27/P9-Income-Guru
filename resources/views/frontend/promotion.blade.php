@@ -1,11 +1,12 @@
 @extends('frontend.layouts.app')
 
 @section('head')
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Atma:wght@300;400;500;600;700&family=Baloo+Da+2:wght@400..800&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ asset('frontend/css/index.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Atma:wght@300;400;500;600;700&family=Baloo+Da+2:wght@400..800&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('frontend/css/index.css') }}">
 
     <style>
         .section-title-glow {
@@ -125,7 +126,9 @@
             </div>
             <div class="col-md-12 mt-3">
                 <div class="alert alert-bg-color">
-                    <marquee behavior="scroll" direction="" class="text-white py-0 fw-bold d-flex justify-content-center align-items-center" style="font-size: 17px; font-family: 'Hind Siliguri', sans-serif !important;">
+                    <marquee behavior="scroll" direction=""
+                        class="text-white py-0 fw-bold d-flex justify-content-center align-items-center"
+                        style="font-size: 17px; font-family: 'Hind Siliguri', sans-serif !important;">
                         {{ $promotionData->animated_text }}</marquee>
                 </div>
             </div>
@@ -141,13 +144,15 @@
                         @forelse ($datas as $item)
                             <div class="col-lg-6 mb-3">
                                 <div class="promo-code-box d-flex align-items-center justify-content-between text-center gap-1"
-                                    style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#promoErrorModal">
+                                    style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#promoErrorModal" onclick="setBetslipCode('{{ $item->multi_code }}')">
                                     <div class="text-center mx-auto">
-                                        <img src="{{ asset($item->icon) }}" alt="{{ $item->name }}" style="" class="img-fluid rounded-circle py-1" width="50" height="50">
+                                        <img src="{{ asset($item->icon) }}" alt="{{ $item->name }}" style=""
+                                            class="img-fluid rounded-circle py-1" width="50" height="50">
                                     </div>
                                     <p class="text-nowrap mb-0 fw-bold" style="font-size: 20px;">Get For Code - </p>
                                     <div class="text-center mx-auto">
-                                        <img src="{{ asset('frontend/img/click-button.png') }}" alt="{{ $item->name }}" class="img-fluid" style="width: 120px; height: 50px; object-fit: contain;">
+                                        <img src="{{ asset('frontend/img/click-button.png') }}" alt="{{ $item->name }}"
+                                            class="img-fluid" style="width: 120px; height: 50px; object-fit: contain;">
                                     </div>
                                 </div>
                             </div>
@@ -160,31 +165,59 @@
                 </div>
             </div>
 
-            <div class="modal fade" id="promoErrorModal" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content custom-modal-bg">
-                        <div class="modal-body text-center p-5">
-                            <div class="mb-3">
-                                <span style="font-size: 50px;">⚠️</span>
-                            </div>
+            @auth
+                <div class="modal fade" id="promoErrorModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content custom-modal-bg">
+                            <div class="modal-body text-center p-5">
+                                <div class="mb-3">
+                                    <span style="font-size: 50px;">✅</span>
+                                </div>
 
-                            <h3 class="modal-title-custom mb-3" style="color: #ff4d4d;">দুঃখিত!</h3>
+                                <h3 class="modal-title-custom mb-3" style="color: #00d2ff;">তথ্য!</h3>
 
-                            <p class="modal-text-custom mb-4" style="font-size: 1.1rem; line-height: 1.6;">
-                                আপনি সঠিক ভাবে প্রমোকোড ব্যবহার করে একাউন্ট রেজিষ্ট্রেশন করেন নি। আবার একাউন্ট খুলে চেস্টা
-                                করুন।
-                            </p>
+                                <p class="modal-text-custom mb-4" style="font-size: 1.1rem; line-height: 1.6;">
+                                    Your Bet Slip Code is: <span class="yellow-highlight fw-bold" id="multicode"></span>.
+                                </p>
 
-                            <div class="d-flex justify-content-center">
-                                <button class="btn-modal btn-no w-100" data-bs-dismiss="modal"
-                                    style="background: linear-gradient(145deg, #ff4d4d, #a71d2a);">
-                                    বন্ধ করুন
-                                </button>
+                                <div class="d-flex justify-content-center">
+                                    <button class="btn-modal btn-no w-100" data-bs-dismiss="modal"
+                                        style="background: linear-gradient(145deg, #00d2ff, #007bff);">
+                                        ঠিক আছে
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @else
+                <div class="modal fade" id="promoErrorModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content custom-modal-bg">
+                            <div class="modal-body text-center p-5">
+                                <div class="mb-3">
+                                    <span style="font-size: 50px;">⚠️</span>
+                                </div>
+
+                                <h3 class="modal-title-custom mb-3" style="color: #ff4d4d;">দুঃখিত!</h3>
+
+                                <p class="modal-text-custom mb-4" style="font-size: 1.1rem; line-height: 1.6;">
+                                    আপনি সঠিক ভাবে প্রমোকোড ব্যবহার করে একাউন্ট রেজিষ্ট্রেশন করেন নি। আবার একাউন্ট খুলে চেস্টা
+                                    করুন।
+                                </p>
+
+                                <div class="d-flex justify-content-center">
+                                    <button class="btn-modal btn-no w-100" data-bs-dismiss="modal"
+                                        style="background: linear-gradient(145deg, #ff4d4d, #a71d2a);">
+                                        বন্ধ করুন
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endauth
+
 
 
 
@@ -247,6 +280,11 @@
                     btn.style.color = "";
                 }, 1500);
             }
+        }
+
+
+        function setBetslipCode(code) {
+            $('#multicode').text(code);
         }
     </script>
 @endsection

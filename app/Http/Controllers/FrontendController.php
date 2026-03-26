@@ -92,7 +92,7 @@ class FrontendController extends Controller
         ) {
             return redirect()->route('frontend.verify.player');
         }
-        $datas = Promo::select(['id', 'name', 'icon', 'promo_code'])->get();
+        $datas = Promo::select(['id', 'name', 'icon', 'promo_code', 'multi_code'])->get();
 
         $promotionData = Cache::rememberForever('promotion', function () {
             return Promotion::first();
