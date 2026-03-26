@@ -37,6 +37,7 @@
                                     <tr>
                                         <th>Name</th>
                                         <th>Promo Code</th>
+                                        <th>Multi Code</th>
                                         <th>Link</th>
                                         <th>Icon</th>
                                         <th>Action</th>
@@ -47,6 +48,7 @@
                                         <tr>
                                             <td><b>{{ $item->name }}</b></td>
                                             <td>{{ $item->promo_code }}</td>
+                                            <td>{{ $item->multi_code }}</td>
                                             <td>
                                                 <a href="{{ $item->link }}" target="_blank">Click Here</a>
                                             </td>

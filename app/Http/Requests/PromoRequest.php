@@ -24,11 +24,14 @@ class PromoRequest extends FormRequest
         $iconRule = $this->isMethod('post')
             ? 'required|image|mimes:jpg,jpeg,png,svg,webp'
             : 'nullable|image|mimes:jpg,jpeg,png,svg,webp';
+
+
         return [
             'name'       => 'required|string|max:100',
             'icon'       => $iconRule,
             'link'       => 'required|url|max:255',
             'promo_code' => 'required|string|max:50',
+            'multi_code' => 'required|string|max:50',
         ];
     }
 }

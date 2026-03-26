@@ -27,7 +27,7 @@
                             @csrf
                             @method('PUT')
                             <div class="row">
-                                <div class="form-group col-lg-6">
+                                <div class="form-group col-lg-4">
                                     <label for="name">Name <small class="text-danger">*</small></label>
                                     <input type="text" class="form-control" placeholder="Promo Name" name="name"
                                         required id="name" value="{{ old('name', $promo->name) }}">
@@ -35,11 +35,19 @@
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                <div class="form-group col-lg-6">
+                                <div class="form-group col-lg-4">
                                     <label for="promo_code">Promo Code <small class="text-danger">*</small></label>
                                     <input type="text" class="form-control" placeholder="Promo Code" name="promo_code"
                                         required id="promo_code" value="{{ old('promo_code', $promo->promo_code) }}">
                                     @error('promo_code')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label for="multi_code">Multi Code <small class="text-danger">*</small></label>
+                                    <input type="text" class="form-control" placeholder="Multi Code" name="multi_code"
+                                        required id="multi_code" value="{{ old('multi_code', $promo->multi_code) }}">
+                                    @error('multi_code')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
@@ -59,7 +67,6 @@
                                     @enderror
                                 </div>
 
-                                
 
 
 
