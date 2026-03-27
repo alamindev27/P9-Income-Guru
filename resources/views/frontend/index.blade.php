@@ -166,7 +166,7 @@
         <div class="col-12 text-center mt-3 mx-auto">
 
             <div class="proof-card p-2">
-                <div class="proof-title">Proof Your Bankroll in <span class="yellow-highlight">3 Easy</span>
+                <div class="proof-title">Last 3 days <span class="yellow-highlight"> Results</span>
                 </div>
 
                 @foreach ($proofs as $item)
