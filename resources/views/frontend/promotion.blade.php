@@ -112,6 +112,32 @@
             object-fit: contain;
             margin-right: 0px;
         }
+
+        .custom-warning-alert {
+            border: 1px solid #ff9800;
+            border-radius: 10px;
+            padding: 6px;
+            background: rgba(255, 152, 0, 0.05);
+            color: #fff;
+            font-family: 'Hind Siliguri', sans-serif;
+            box-shadow: 0 0 15px rgba(255, 152, 0, 0.2);
+        }
+
+        .warning-icon {
+            color: #ff9800;
+            font-size: 24px;
+        }
+
+        .warning-text {
+            font-size: .8rem;
+            line-height: 1.5;
+        }
+
+        .warning-text .highlight {
+            color: #ff9800;
+            font-weight: bold;
+            text-decoration: underline;
+        }
     </style>
     <link rel="preload" as="image" href="{{ asset('frontend/img/click-button.png') }}">
 @endsection
@@ -144,7 +170,8 @@
                         @forelse ($datas as $item)
                             <div class="col-lg-6 mb-3">
                                 <div class="promo-code-box d-flex align-items-center justify-content-between text-center gap-1"
-                                    style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#promoErrorModal" onclick="setBetslipCode('{{ $item->multi_code }}')">
+                                    style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#promoErrorModal"
+                                    onclick="setBetslipCode('{{ $item->multi_code }}')">
                                     <div class="text-center mx-auto">
                                         <img src="{{ asset($item->icon) }}" alt="{{ $item->name }}" style=""
                                             class="img-fluid rounded-circle py-1" width="50" height="50">
@@ -220,17 +247,44 @@
 
 
 
-
-
-            <div class="col-12 text-center mt-3 mx-auto">
-                <div class="proof-card p-2">
-                    <h2 class="section-title-glow">{{ $promotionData->heading_bottom }}</h2>
+            <div class="custom-alert-container mt-3">
+                <div class="custom-warning-alert d-flex  gap-2">
+                    <div class="warning-icon">
+                        <span style="font-size: 21px;">⚠️</span>
+                    </div>
+                    <div class="warning-text">
+                        {{ $promotionData->heading_bottom }}
+                    </div>
                 </div>
             </div>
 
+
+            <div class="col-12">
+                <div class="proof-card p-2 mt-3">
+                    <div class="row justify-content-center text-center">
+                        <div class="col-4">
+                            <span style="font-size: 21px;" class="d-block">💬</span>
+                            <span class="yellow-highlight">Official Partner Links</span>
+                        </div>
+                        <div class="col-4 border-start border-end border-secondary">
+                            <span style="font-size: 21px;" class="d-block">📝</span>
+                            <span class="yellow-highlight">Secoure Registration</span>
+                        </div>
+                        <div class="col-4">
+                            <span style="font-size: 21px;" class="d-block">🎁</span>
+                            <span class="yellow-highlight">100% Free Multi Access</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
             <div class="col-12 text-center mt-3 mx-auto">
                 <div class="proof-card p-2">
-                    <div class="proof-title">Join Our Official <span class="yellow-highlight">Teligram Chanel</span> </div>
+                    <div class="proof-title">Join Our Official <span class="yellow-highlight">Teligram Chanel</span>
+                    </div>
                     <div class="stats-container">
                         <a href="{{ social()->link }}" title="{{ social()->name }}">{!! social()->icon !!}</a>
                     </div>
