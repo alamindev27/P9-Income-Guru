@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SocialController;
 use App\Http\Controllers\Admin\PromotionalController;
 use App\Http\Controllers\Admin\ReviewController;
-use App\Http\Controllers\VideoController;
+use App\Http\Controllers\Admin\VideoController;
 use Illuminate\Support\Facades\Route;
 
 Route::name('admin.')->group(function () {

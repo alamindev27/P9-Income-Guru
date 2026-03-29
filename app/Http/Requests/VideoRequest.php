@@ -36,8 +36,8 @@ class VideoRequest extends FormRequest
             'description' => 'required|string',
 
             'thumbnail' => $videoId
-                ? 'nullable|image|mimes:jpeg,png,jpg,gif,svg,avif|dimensions:width=1280,height=720'
-                : 'required|image|mimes:jpeg,png,jpg,gif,svg,avif|dimensions:width=1280,height=720',
+                ? 'nullable|image|mimes:jpeg,png,jpg,gif,svg,avif'
+                : 'required|image|mimes:jpeg,png,jpg,gif,svg,avif',
 
             'video' => $videoId
                 ? 'nullable|file|mimes:mp4,mov,avi,wmv,mkv'
